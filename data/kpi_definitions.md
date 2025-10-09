@@ -46,14 +46,6 @@
 | **Sleep–Performance Correlation** | Scatter: X = AVG(Sleep_Previous_Night), Y = AVG(Calories_Burned) | Shows relation between sleep and next-day performance | Reveals how rest impacts energy output | Looker Studio |
 | **Workout–Calories Relationship** | Scatter: X = AVG(Workout_Duration_(min)), Y = AVG(Calories_Burned) | Displays dependency between training length and calories. | Highlights efficiency of different workouts. | Looker Studio |
 
-## Data Quality & Validation KPIs
-| **KPI Name** | **Formula / Logic** | **Description** | **Business Purpose** | **Source** |
-|---------------|--------------------|-----------------|----------------------|-------------|
-| **Data Completeness** | IF [Steps] = null OR [Sleep_Hours] = null OR [Workout_Type] = null THEN "Incomplete" <br>ELSE "Complete" | Verifies data presence for each record | Ensures analytical reliability | Power Query |
-| **Data Validation Flag** | IF [Calories_per_Minute] = null OR [Average_HR] = null OR [Workout_Duration_min] = null then "No data" <br>ELSE IF [Calories_per_Minute] > 20 THEN "Check_High_Burn_Rate" <br>ELSE IF [Average_HR] > 200 THEN "Check_High_HR" <br>ELSE IF [Workout_Duration_min] > 240 THEN "Check_Long_Duration" <br>ELSE "Valid" | Flags invalid or extreme values | Supports data governance and QA | Power Query |
-| **Valid Records Count** | COUNTIF(Data_Validation_Flag = "Valid") | Count of rows passing all validation checks | Measures final data quality | Power Query |
-| **Data Quality Score (%)** | Valid Records / Total Records * 100 | Overall validation success rate | Indicates ETL accuracy | Power Query |
-
 ## Derived Context Fields
 | **KPI / Field** | **Formula / Derivation** | **Purpose** |
 |------------------|--------------------------|--------------|
