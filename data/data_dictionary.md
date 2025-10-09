@@ -1,4 +1,4 @@
-# 🧾 Fitness Analytics - Data Dictionary
+# 🧾 Data Dictionary
 
 > **Purpose:** Define and document all columns across the *Fitness Analytics Dashboard* dataset, describing their meaning, data type, origin, and transformation logic.
 
