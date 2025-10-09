@@ -9,7 +9,7 @@
 | `ActivityTracking` | Daily step count, distance, and active minutes | `FitnessData_raw_sample.xlsx` |
 | `SleepMonitoring` | Nightly sleep duration | `FitnessData_raw_sample.xlsx` |
 | `HeartRateData` | Daily average, max, and resting heart rate | `FitnessData_raw_sample.xlsx` |
-| `FitnessData_Clean` | Unified clean fact table combining all sources | `FitnessData_clean_sample.xlsx` |
+| `FitnessData` | Unified clean fact table combining all sources | `FitnessData_fitness_sample.xlsx` |
 
 ## WorkoutLogs (RAW)
 | **Column Name** | **Example** | **Description** | **Transformation Notes** |
@@ -42,7 +42,7 @@
 | Resting_HR |   57 | Resting heart rate for the day | Cleaned via `fxNumber` |
 
 
-## FitnessData_Clean (Unified Table)
+## FitnessData (Unified Table)
 | **Column Name** | **Data Type** | **Description** | **Example Values** | **Derived From** |
 |------------------|----------|--------------|------------------|--------------|
 | Date | Date | ISO format date (YYYY-MM-DD) | 024-03-15 | All tables (joined) |
