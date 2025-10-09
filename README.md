@@ -1,4 +1,4 @@
-# Fitness Analytics Dashboard - Power Query ETL & Looker Studio BI
+# 📊 Fitness Analytics Dashboard - Power Query ETL & Looker Studio BI
 
 An end-to-end fitness analytics project that cleans messy multi-sheet Excel data with **Power Query (M)** and visualizes performance, recovery, and sleep patterns in **Looker Studio** with full cross-filtering, drill-downs, and optional metrics.
 
@@ -6,25 +6,25 @@ An end-to-end fitness analytics project that cleans messy multi-sheet Excel data
 ```
 ```
 
-## 🧭 Project Goals
+## Project Goals
 - Build a reliable, analysis-ready fitness dataset from heterogeneous Excel sheets
 - Standardize inconsistent formats (dates, units, text casing, "K" notations) and remove duplicates
 - Enrich data with a full calendar, HR imputations, and analysis fields
 - Deliver a 3-page interactive dashboard for executives and practitioners
 
-## 📦 Data Overview
+## Data Overview
 - **Source**: Single Excel workbook with 4 sheets (synthetic data)
 - **Sheets**: WorkoutLogs, ActivityTracking, SleepMonitoring, HeartRateData
 - **Size**: ~400 rows per sheet (daily granularity, 2024)
 - **Issues handled**: mixed date formats (6), mixed units (min/h, km/m/mi), text noise, "K" thousands, ~5% duplicate rows, ~10% null Average HR
 - **Final output**: Unified star-like table `FitnessData_Clean` (27 columns) with full 2024 calendar
 
-## 🛠️ Tech Stack
+## Tech Stack
 - **Power Query (M)** in Excel - ETL, custom functions, validation
 - **Looker Studio** - KPI & trends, cross-filters, drill-downs, optional metrics, tooltips
 - Versioning & docs - Git, GitHub
   
-## 🧩 Custom M Functions (full library)
+## Custom M Functions (full library)
 | Function     | Purpose                                           | Business Impact |
 |--------------|---------------------------------------------------|-----------------|
 | `fxClean`    | Trim, normalize spacing, standardize text case    | Ensures data consistency and reliable joins |
@@ -35,12 +35,12 @@ An end-to-end fitness analytics project that cleans messy multi-sheet Excel data
 | `fxToHours`  | Minutes → decimal hours for time-based charts     | Enables hour-level aggregations |
 | `fxToKm`     | m/mi → km normalization                           | Allows accurate distance comparison |
 
-## 🧪 Data Validation
+## Data Validation
 - Duplicate detection (~5% rows) and removal
 - HR null handling via per-type *MedianHR* imputation
 - Range checks (HR 50–195, sleep 4–12h), unit sanity checks
 
-## 🔗 Architecture (ETL)
+## Architecture (ETL)
 ```
 Raw Excel (4 sheets)
 └─ Cleaning + Standardization (fxClean, fxText, fxDate, fxNumber)
@@ -50,7 +50,7 @@ Raw Excel (4 sheets)
 └─ FitnessData_Clean (27 cols) -> Looker Studio
 ```
 
-## ✨ Dashboard Highlights
+## Dashboard Highlights
 - **Pages**: Executive Overview, Workout Analytics, Health & Recovery
 - **Interactions**
   - Cross-filtering: selecting any chart element filters related visuals
@@ -60,23 +60,23 @@ Raw Excel (4 sheets)
 - **Tooltips**: tooltip-driven insights and detailed metrics for user-friendly storytelling
 - **Consistent Color System**: per workout type & intensity tiers (High/Medium/Low)
 
-## 📊 Key Metrics & Fields
+## Key Metrics & Fields
 - Workout Consistency, Avg Workout Minutes
 - Avg/Max HR (bpm), Calories per Minute
 - Sleep Duration buckets (Short/Optimal/Long), Resting HR trend
 - Next-day performance link: previous-night sleep → next-day calories & minutes
 
-## 📈 Analytical Insights (sample)
+## Analytical Insights (sample)
 - Walking & Running months drive higher steps and active minutes; HIIT yields the highest Calories/min
 - Previous-night sleep 6–8h aligns with better next-day energy output, especially for HIIT/Running
 - Resting HR remains stable with mild seasonality; no overtraining signal overall
 
-## 🚀 Reproduce
+## Reproduce
 
-## 📄 License
+## License
 MIT — see `LICENSE`
 
-## 📬 Connect
+## Connect
 **Monika Burnejko** - Data Analyst  
 📧 [monikaburnejko@gmail.com](mailto:monikaburnejko@gmail.com)  
 💼 [LinkedIn](https://www.linkedin.com/in/monika-burnejko-9301a1357)  
