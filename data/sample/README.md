@@ -14,7 +14,7 @@
 |------------|----------------|---------------------------|---------------------------|
 | **RAW** | Direct export from source tracking systems | Inconsistent date formats, unit mismatches, nulls, duplicates | `03/04/24`, `1.5 h`, `6 h 40 min`, `8400 m`, `127 bpm` |
 | **CLEAN** | Post-ETL cleaning and normalization | Trimmed text, standardized units and date formats, removed duplicates | `2024-03-04`, `90 min`, `6.7 h`, `8.4 km`, `127` |
-| **FINAL** | Merged analytical dataset with derived metrics | Combined all sources by `Date`, added KPIs and flags | `Calories_per_Minute`, `Workout_Intensity`, `Sleep_Previous_Night`, `Data_Validation_Flag` |
+| **FINAL** | Merged analytical dataset with derived metrics | Combined all sources by `Date`, added KPIs and flags | `Calories_per_Minute`, `Workout_Intensity`, `Sleep_Previous_Night` |
 
 ## Key Differences Between Versions
 | Aspect | RAW | CLEAN | FINAL |
@@ -26,7 +26,7 @@
 | **Date Formats** | 6 mixed formats | Unified to ISO (YYYY-MM-DD) | ISO (YYYY-MM-DD) |
 | **Text Normalization** | Inconsistent case & spacing | Trimmed, normalized case | Consistent |
 | **Derived Columns** | None | None | Added (Calories_per_Minute, Workout_Intensity, Steps_Goal_%, Steps_Goal_Reached, Sleep_PreviousNight, etc.) |
-| **Validation Flags** | None | None | Complete QA validation (Data_Completeness, Data_Validation_Flag) |
+| **Validation Flags** | None | None | Complete QA validation |
 | **Completeness** | Partial | Partial | Full calendar coverage (365 days) with structural nulls preserved |
 | **Analytical Readiness** | Low - inconsistent | Medium - clean but fragmented | High - merged, validated, and feature-enriched |
 
@@ -52,7 +52,6 @@
   - Workout_Intensity
   - Steps_Goal_% & Steps_Goal_Reached
   - Sleep_Previous_Night
-  - Data_Completeness & Validation_Flag
 
 ## Column Summary (Final Version)
 | **Category** | **Column Name** | **Type** | **Description** |
@@ -63,7 +62,6 @@
 | Sleep | `Sleep_Hours` | Number| Sleep metrics for recovery analysis |
 | Heart Rate | `Average_HR`, `Max_HR`, `Resting_HR` | Number | Physiological response data |
 | Derived Fields | `Workout_Intensity`, `Calories_per_Minute`, `Steps_Goal_%`, `Sleep_Duration`, `Sleep_Previous_Night`| Calculated | Calculated metrics and analytical enrichments |
-| QA Fields | `Data_Completeness`, `Data_Validation_Flag`, `Average_HR_Imputed` | Text/Boolean | Data quality, completeness, and validation controls | 
 
 ## Related ETL Functions
 All cleaning operations were performed using custom Power Query functions:
