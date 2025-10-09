@@ -70,8 +70,6 @@
 | Sleep_Hours | Decimal | Hours of sleep | 7.5 | From SleepMonitoring |
 | Sleep_PreviousNight | Decimal | Previous night's sleep hours | 6.5 | Derived from Sleep_Hours (offset -1 day by Date) |
 | Sleep_Duration | Text | Sleep category | Optimal(6-8h) | Derived from Sleep_Hours |
-| Data_Completeness | Text | Data quality flag | Complete/Incomplete | FitnessData_Clean (post-validation rules) |
-| Data_Validation_Flag | Text | Validation status | Valid/No_data | FitnessData_Clean (post-validation rules) |
 
 📅 *Last updated: October 2025*  
 👩‍💻 *Author: Monika Burnejko*
