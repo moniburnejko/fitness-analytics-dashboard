@@ -1,75 +1,38 @@
-# 🧾 Data Dictionary
+# 📘 Data Dictionary - `fitness_data_validation`
 
-> **Purpose:** Define and document all columns across the *Fitness Analytics Dashboard* dataset, describing their meaning, data type, origin, and transformation logic.
-
-## 📂 Table Overview
-| **Table Name** | **Description** | **Source File** |
-|----------------|-----------------|-----------------|
-| `WorkoutLogs` | Records of daily workouts (type, duration, calories) | `FitnessData_raw_sample.xlsx` |
-| `ActivityTracking` | Daily step count, distance, and active minutes | `FitnessData_raw_sample.xlsx` |
-| `SleepMonitoring` | Nightly sleep duration | `FitnessData_raw_sample.xlsx` |
-| `HeartRateData` | Daily average, max, and resting heart rate | `FitnessData_raw_sample.xlsx` |
-| `FitnessData` | Unified clean fact table combining all sources | `FitnessData_fitness_sample.xlsx` |
-
-## WorkoutLogs (RAW)
-| **Column Name** | **Example** | **Description** | **Transformation Notes** |
-|-----------------|-------------|-----------------|--------------------------|
-| Date | Jul 30 2024 | Workout session date | Unified via `fxDate` |
-| Workout Type | hiit session | Activity type | Cleaned via `fxText`; nulls retained for missing sessions |
-| Workout Duration (min) |  1 h 17 min | Session length | Converted to minutes via `fxToMinutes` |
-| Calories Burned | ~265 kcal  | Total calories burned per session | Cleaned via `fxNumber` |
-
-## ActivityTracking (RAW)
-| **Column Name** | **Example** | **Description** | **Transformation Notes** |
-|-----------------|--------------|-----------------|--------------------------|
-| Date | 2024.02.13 | Day of recorded activity | Unified via `fxDate` |
-| Steps |  3.0K | Number of steps recorded per day | Converted to numeric; normalized K notation |
-| Distance (km) | 5,1 mi | Distance walked/run | Converted to kilometers via `fxToKM` |
-| Active Minutes | 0.7 h  | Total active minutes per day | Normalized via `fxToMinutes` |
-
-## SleepMonitoring (RAW)
-| **Column Name** | **Example** | **Description** | **Transformation Notes** |
-|-----------------|-------------|-----------------|--------------------------|
-| Date | 22/02/2024 | Sleep record date | Unified via `fxDate`|
-| Sleep_Hours |  7 h 1 min  | Total hours slept | Cleaned via `fxNumber` |
-
-## HeartRateData (RAW)
-| **Column Name** | **Example** | **Description** | **Transformation Notes** |
-|-----------------|-------------|-----------------|--------------------------|
-| Date | 20 May 2024 | Heart rate measurement date | Unified via `fxDate` |
-| Average_HR |   138bpm  | Average heart rate during workout | Cleaned via `fxNumber`; missing values filled by median |
-| Max_HR | 166 BPM  | Maximum recorded heart rate | Cleaned via `fxNumber` |
-| Resting_HR |   57 | Resting heart rate for the day | Cleaned via `fxNumber` |
-
-
-## FitnessData (Unified Table)
-| **Column Name** | **Data Type** | **Description** | **Example Values** | **Derived From** |
-|------------------|----------|--------------|------------------|--------------|
-| Date | Date | ISO format date (YYYY-MM-DD) | 024-03-15 | All tables (joined) |
-| DayOfWeek | Text | Day name | Monday | Derived from Date | 
-| DayOfWeek_Number | Integer | Day number (1=Monday) | 1 | Derived from Date |
-| Month_Name | Text | Month name | January | Derived from Date| 
-| Month_Number | Integer | Month number | 1 | Derived from Date| 
-| Month_StartDate | Date | First day of month | 2024-01-01 | Derived from Date | 
-| YearMonth | Text | Year-Month format | 2024-01 | Derived from Date | 
-| Quarter | Text | Quarter designation | Q1 | Derived from Date | 
-| Workout_Type | Text | Type of workout | Running | From WorkoutLogs |
-| Workout_Intensity | Text | Calculated intensity level | High | Derived from HR data |
-| Workout_Duration_min | Integer | Duration in minutes | 45 | From WorkoutLogs | 
-| Calories_Burned | Integer | Calories burned | 350 | From WorkoutLogs |
-| Calories_per_Minute | Decimal | Calculated burn rate | 7.78 | Derived (Calories/Duration) |
-| Active_Minutes | Integer | Total active minutes | 90 | From ActivityTracking |
-| Average_HR | Integer | Average heart rate | 135 | From HeartRateData |
-| Average_HR_Imputed | Boolean | Imputation flag | TRUE/FALSE | HeartRateData + MedianHR helper table |
-| Max_HR | Integer | Maximum heart rate | 165 | From HeartRateData |
-| Resting_HR | Integer | Resting heart rate | 62 | From HeartRateData |
-| Distance_km | Decimal | Distance in kilometers | 5.5 | From ActivityTracking |
-| Steps | Integer | Step count | 8500 | From ActivityTracking |
-| Steps_Goal_% | Decimal | Percentage of 10K goal | 85.0 | Derived (Steps / 10K) |
-| Steps_Goal_Reached | Boolean | Goal achievement flag | TRUE/FALSE | Derived from Steps_Goal_% |
-| Sleep_Hours | Decimal | Hours of sleep | 7.5 | From SleepMonitoring |
-| Sleep_PreviousNight | Decimal | Previous night's sleep hours | 6.5 | Derived from Sleep_Hours (offset -1 day by Date) |
-| Sleep_Duration | Text | Sleep category | Optimal(6-8h) | Derived from Sleep_Hours |
+| Column Name | Data Type | Description | Example Values | Derived From |
+|--------------|------------|--------------|----------------|---------------|
+| **date** | Date | ISO format date (YYYY-MM-DD) | `2024-03-12` | All tables (joined) + `calendar scaffold` (`List.Dates`) |
+| **day_of_week_name** | Text | Abbreviated English name of the weekday | `Mon`, `Tue`, `Wed` | Derived from `date` |
+| **day_of_week_number** | Integer | ISO weekday number (1 = Monday) | `1`, `7` | Derived from `date` |
+| **month_name** | Text | English month name | `March`, `July` | Derived from `date` |
+| **month_number** | Integer | Month number (1–12) | `3`, `7` | Derived from `date` |
+| **month_start_date** | Date | First date of the corresponding month | `2024-03-01` | Derived from `date` |
+| **quarter_name** | Text | Quarter label of the year | `Q1`, `Q2` | Derived from `date` |
+| **workout_type** | Text | Name of the performed workout | `Running`, `HIIT`, `Yoga` | `WorkoutLogs → fx_text + canonical mapping` |
+| **workout_intensity** | Text | Categorization of workout effort based on `average_hr` | `Low`, `Medium`, `High` | Derived from `average_hr` |
+| **workout_duration_min** | Integer | Duration of the workout in minutes | `45`, `90`, `null` | `WorkoutLogs → fx_to_minutes` |
+| **calories_burned** | Integer | Total calories burned during workout | `420`, `750` | `WorkoutLogs → fx_number` |
+| **calories_per_minute** | Decimal | Calories burned per minute | `9.33`, `5.25` | Derived: `calories_burned / workout_duration_min` |
+| **average_hr** | Integer | Average heart rate during the workout | `135`, `null` | `HeartRateData → fx_number` and `median_hr` (via join and imputation logic) |
+| **max_hr** | Integer | Maximum heart rate recorded | `185` | `HeartRateData → fx_number` |
+| **resting_hr** | Integer | Average resting heart rate for the day | `58`, `62` | `HeartRateData → fx_number` |
+| **active_minutes** | Integer | Total number of active minutes recorded | `74`, `null` | `ActivityTracking → fx_to_minutes` |
+| **distance_km** | Decimal | Total distance covered (in kilometers) | `5.24`, `12.0`, `null` | `ActivityTracking → fx_to_km` |
+| **steps** | Integer | Total daily step count | `10567`, `7200`, `null` | `ActivityTracking → clean_steps` |
+| **steps_goal_pct** | Decimal | Step goal completion in percentage (goal = 10,000) | `87.5`, `105.3` | Derived from `steps` |
+| **steps_goal_achieved_flag** | Boolean | Indicates if the daily step goal (10k) was reached | `TRUE`, `FALSE` | Derived from `steps_goal_pct >= 100` |
+| **sleep_hours** | Decimal | Total sleep duration in hours | `6.8`, `7.5`, `null` | `SleepMonitoring → fx_to_hours` |
+| **sleep_duration_group** | Text | Sleep classification by duration | `Short(<6h)`, `Optimal(6–8h)`, `Long(>8h)` | Derived from `sleep_hours` |
+| **sleep_previous_night** | Decimal | Hours of sleep recorded on the previous day | `7.2`, `null` | Calculated in PowerQuery using a `self-join` shifted by one day (`previous-day lookup`) |
+| **average_hr_imputed_flag** | Boolean | Marks records where missing `average_hr` was replaced with the median per workout type | `TRUE`, `FALSE` | Derived from `median_hr` join |
+| **rule_*** | Boolean/Nullable | Individual validation rule results (`TRUE`=passed, `FALSE`=failed, `null`=not applicable) | `rule_range_avg_hr_70_150 = TRUE` | `validation_rules` table |
+| **has_error** | Boolean | `TRUE` if any validation rule with severity `ERROR` failed | `TRUE`, `FALSE` | Aggregated from rule columns |
+| **has_warn** | Boolean | `TRUE` if any validation rule with severity `WARN` failed | `TRUE`, `FALSE` | Aggregated from rule columns |
+| **required_nonnull_count** | Integer | Number of required validation rules returning non-null results | `6`, `9` | Derived from rule evaluation logic |
+| **missing_required_count** | Integer | Number of required rules that returned `NULL` (missing data) | `0`, `2` | Derived from rule evaluation logic |
+| **data_validation_flag** | Text | Global data validation outcome | `Valid`, `Check`, `Invalid`, `NoData` | Based on rule aggregation results |
+| **data_completeness** | Text | Indicates whether all key columns contain valid data | `Complete`, `Incomplete` | Based on presence of core metrics (date, workout, sleep, HR, steps) |
 
 📅 *Last updated: October 2025*  
 👩‍💻 *Author: Monika Burnejko*
