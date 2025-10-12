@@ -1,6 +1,6 @@
 # fitness analytics dashboard: Power Query ETL + validation and Looker Studio BI
-> - this end-to-end analytics project demonstrates a **complete ETL and data validation process in Power Query**, followed by the creation of an **interactive BI dashboard in Looker Studio**
-> - the workflow covers raw data ingestion, cleaning, transformation, validation, enrichment, and performance visualization
+> this end-to-end analytics project demonstrates a **complete ETL and data validation process in Power Query**, followed by the creation of an **interactive BI dashboard in Looker Studio**.
+>the workflow covers raw data ingestion, cleaning, transformation, validation, enrichment, and performance visualization
 
 ## project structure
  ```
