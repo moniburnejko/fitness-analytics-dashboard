@@ -1,5 +1,9 @@
+// function: fx_in_set
+// purpose: verify if a given text value exists within an allowed set of values
+// notes: used for categorical validation (e.g., workout_type domain)
+// author: monika burnejko | 2025
+
 let
-    // returns true if the text value exists within a predefined list of allowed values; returns null when val is null
     fx_in_set=(val as any, allowed as list) as nullable logical =>
     let
         isBlank=fx_null_or_blank(val),
