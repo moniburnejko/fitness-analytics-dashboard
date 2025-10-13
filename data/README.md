@@ -73,16 +73,21 @@ used to demonstrate the data cleaning and validation process during etl
 | `data_completeness` | text | indicates whether all essential data fields are present:<br>• `complete` – all key fields are populated<br>• `incomplete` – one or more critical values missing. |
 
 ## etl & validation overview
-- the full etl pipeline is documented in the [`/etl`](../etl) folder  
-  - includes: `etl_pipeline.md`, `etl_walkthrough.md`, and function definitions in [`/etl/functions`](../etl/functions)  
-- core transformation functions:  
-  - `fx_clean` - text and header normalization  
-  - `fx_date`, `fx_number`, `fx_to_minutes`, `fx_to_hours`, `fx_to_km` - data type standardization  
-  - `fx_text`, `fx_null_or_blank` - text and null handling  
-- data validation logic is defined in the [`/validation`](../validation) folder  
-  - includes: `validation_rules.md`, `validation_walkthrough.md`, `validation_summary.md`, and helper functions in [`/validation/functions`](../validation/functions)  
-- validation rules are applied via `fitness_data_validation`  
-- each rule produces `rule_*` columns, combined into aggregated flags:  
+- the complete etl pipeline is documented in the [`/etl`](../etl) folder  
+  - includes: `etl_pipeline.md`, `etl_walkthrough.md`, and detailed m scripts in [`/etl/queries`](../etl/queries)  
+  - core transformation functions are stored in [`/etl/functions`](../etl/functions)  
+- key transformation functions:  
+  - `fx_clean` — trims, normalizes, and converts headers to snake_case  
+  - `fx_date`, `fx_number`, `fx_to_minutes`, `fx_to_hours`, `fx_to_km` — standardize data types and units  
+  - `fx_text`, `fx_null_or_blank` — normalize text and handle null/blank values  
+- data validation logic is implemented in the [`/validation`](../validation) folder  
+  - includes: `validation_walkthrough.md` (process overview), and modular queries in [`/validation/queries`](../validation/queries)  
+  - helper functions are defined in [`/validation/functions`](../validation/functions)  
+- validation operates on the `fitness_data_final` output from the etl pipeline and applies rule-based checks defined in `validation_rules.pq`  
+- validation output tables:  
+  - `fitness_data_validation` — record-level results with all rule flags  
+  - `validation_summary` — aggregated summary by rule, field, and severity  
+- each rule produces prefixed `rule_*` columns that are aggregated into key quality flags:  
   - `has_error`, `has_warn`, and `data_validation_flag`
 
 ## data license
