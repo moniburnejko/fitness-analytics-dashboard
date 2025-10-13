@@ -1,3 +1,8 @@
+// function: fx_text
+// purpose: clean text values by removing control characters, collapsing whitespace, normalizing punctuation, and applying optional casing mode
+// notes: used for standardizing text columns (e.g., workout_type)
+// author: monika burnejko | 2025
+
 let
     fx_text=(txt as nullable text, optional casing as nullable text) as nullable text =>
     let
