@@ -1,3 +1,6 @@
+// function: fx_list_broken
+// author: monika burnejko | 2025
+
 let
     // collects the names of all validation rules that evaluate to false, ignores nulls
     fx_list_broken=(row as record) as list =>
