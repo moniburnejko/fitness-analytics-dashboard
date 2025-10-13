@@ -17,7 +17,16 @@ fitness-analytics-etl-bi
 ├── 📁 etl/
 │   ├── etl_pipeline.md          
 │   ├── etl_walkthrough.md     
-│   ├── README.md   
+│   ├── README.md
+│   ├── 📁 queries/
+│   │   ├── workoutlogs.pq
+│   │   ├── activitytracking.pq
+│   │   ├── sleepmonitoring.pq
+│   │   ├── heartratedata.pq
+│   │   ├── fitness_data_base.pq
+│   │   ├── median_hr.pq
+│   │   ├── fitness_data_final.pq
+│   │   └── README.md  
 │   └── 📁 functions/
 │       ├── fx_clean.pq
 │       ├── fx_text.pq
@@ -29,10 +38,13 @@ fitness-analytics-etl-bi
 │       └── README.md
 │
 ├── 📁 validation/
-│   ├── validation_walkthrough.md
-│   ├── validation_rules.pq         
-│   ├── validation_summary.pq    
-│   ├── README.md   
+│   ├── validation_walkthrough.md  
+│   ├── README.md
+│   ├── 📁 queries/
+│   │   ├── validation_rules.pq
+│   │   ├── fitness_data_validation.pq
+│   │   ├── validation_summary.pq
+│   │   └── README.md     
 │   └── 📁 functions/
 │       ├── fx_is_null_or_blank.pq
 │       ├── fx_is_numeric.pq
@@ -75,8 +87,6 @@ fitness-analytics-etl-bi
 | [`etl_pipeline.md`](./etl/etl_pipeline.md) | `/etl` | etl architecture overview and power query data flow |
 | [`etl_walkthrough.md`](./etl/etl_walkthrough.md) | `/etl` | step-by-step transformation guide for the etl pipeline |
 | [`validation_walkthrough.md`](./validation/validation_walkthrough.md) | `/validation` | detailed explanation of validation logic, structure, and rule application |
-| [`validation_rules.md`](./validation/validation_rules.md) | `/validation` | parameterized list of validation rules with thresholds, columns, and severities |
-| [`validation_summary.md`](./validation/validation_summary.md) | `/validation` | aggregated counts by validation category (valid, check, invalid, nodata) and completeness |
 | [`report_overview.md`](./dashboard/report_overview.md) | `/dashboard` | looker studio dashboard layout, interactions, and metrics mapping |
 | [`portfolio_summary.md`](./docs/portfolio_summary.md) | `/docs` | executive project summary for portfolio presentation |
 
