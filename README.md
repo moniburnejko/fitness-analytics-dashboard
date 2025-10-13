@@ -112,29 +112,30 @@ fitness-analytics-etl-bi
 | **looker studio** | interactive dashboard creation |
 | **github** | version control and technical documentation |
 
-
 ## ETL architecture
 ```mermaid
-graph TD
-  A["raw excel files (workoutlogs, activitytracking, heartratedata, sleepmonitoring)"]
-  B["power query functions (fx_*)"]
-  C["staging tables (cleaned per source)"]
-  D["fitness_data_base (joined by date)"]
-  E["median_hr"]
-  F["fitness_data_final (calendar + computed fields)"]
-  G["validation_rules"]
-  H["fitness_data_validation (rule_* + flags)"]
-  I["validation sample (.xlsx)"]
-  J["looker studio dashboard"]
+flowchart TD
+  A[workoutlogs]
+  B[activitytracking]
+  C[sleepmonitoring]
+  D[heartratedata]
+  E[fitness_data_base]
+  F[median_hr]
+  G[fitness_data_final]
+  H[fitness_data_validation]
+  I[validation_summary]
+  Z[looker studio]
 
-  A --> B --> C --> D
+  A --> E
+  B --> E
+  C --> E
   D --> E
-  D --> F
   E --> F
-  F --> G --> H
+  E --> G
+  F --> G
+  G --> H
   H --> I
-  F --> J
-  H --> J
+  H --> Z
 ```
 
 ## custom M functions
