@@ -1,8 +1,9 @@
 // function: fx_null_or_blank
+// purpose: check whether a value is null or an empty string
+// notes: used in completeness validation rules
 // author: monika burnjko | 2025
 
 let
-    // checks if a given value is null, empty string, or whitespace-only text
     fx_null_or_blank=(x as any) as logical =>
     let
         res=
