@@ -186,12 +186,12 @@ before reproducing the project, make sure you have:
      [`/.github/feature_request.md`](./.github/feature_request.md) or [`/.github/bug_report.md`](./.github/bug_report.md)
      
 ## license
-- this project is released under the **mit license**
-- feel free to reuse or adapt parts of this repository for educational and analytical purposes
+this project is released under the **mit license**.
+feel free to reuse or adapt parts of this repository for educational and analytical purposes
 
 ## connect
 **Monika Burnejko**
-*data analyst in training | excel & power query | bi & automation enthusiast*  
+<br>*data analyst in training | excel & power query | bi & automation enthusiast*  
 📧 [monikaburnejko@gmail.com](mailto:monikaburnejko@gmail.com)  
 💼 [linkedin](https://www.linkedin.com/in/monika-burnejko-9301a1357)  
 🌐 [portfolio](https://www.notion.so/monikaburnejko/Data-Analytics-Portfolio-2761bac67ca9807298aee038976f0085?pvs=9)
