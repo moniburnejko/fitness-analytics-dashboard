@@ -1,3 +1,8 @@
+// function: fx_clean
+// purpose: remove empty rows, trim all text fields, and normalize column headers to lowercase snake_case
+// notes: applied at the start of each query to ensure consistent schema and clean data structure
+// author: monika burnejko | 2025
+
 let
     fx_clean=(t as table) as table =>
     let
