@@ -1,6 +1,7 @@
-# fitness analytics dashboard: Power Query ETL + validation and Looker Studio BI
-> this end-to-end analytics project demonstrates a **complete ETL and data validation process in Power Query**, followed by the creation of an **interactive BI dashboard in Looker Studio**.
->the workflow covers raw data ingestion, cleaning, transformation, validation, enrichment, and performance visualization
+# fitness analytics: power query etl + validation and looker studio bi
+
+this end-to-end analytics project demonstrates a **complete etl and data validation process in power query**, followed by the creation of an **interactive bi dashboard in looker studio**.
+the workflow covers raw data ingestion, cleaning, transformation, validation, enrichment, and performance visualization
 
 ## project structure
  ```
@@ -69,21 +70,21 @@ fitness-analytics-dashboard/
 | file | folder | description |
 |------|---------|-------------|
 | [`data_dictionary.md`](./docs/data_dictionary.md) | `/docs` | full column-level metadata including validation and quality flags |
-| [`kpi_definitions.md`](./docs/kpi_definitions.md) | `/docs` | KPI and metric calculation logic used in the dashboard |
-| [`etl_pipeline.md`](./etl/etl_pipeline.md) | `/etl` | ETL architecture overview and Power Query data flow |
-| [`etl_walkthrough.md`](./etl/etl_walkthrough.md) | `/etl` | step-by-step transformation guide for the ETL pipeline |
+| [`kpi_definitions.md`](./docs/kpi_definitions.md) | `/docs` | kpi and metric calculation logic used in the dashboard |
+| [`etl_pipeline.md`](./etl/etl_pipeline.md) | `/etl` | etl architecture overview and power query data flow |
+| [`etl_walkthrough.md`](./etl/etl_walkthrough.md) | `/etl` | step-by-step transformation guide for the etl pipeline |
 | [`validation_walkthrough.md`](./validation/validation_walkthrough.md) | `/validation` | detailed explanation of validation logic, structure, and rule application |
 | [`validation_rules.md`](./validation/validation_rules.md) | `/validation` | parameterized list of validation rules with thresholds, columns, and severities |
 | [`validation_summary.md`](./validation/validation_summary.md) | `/validation` | aggregated counts by validation category (valid, check, invalid, nodata) and completeness |
-| [`report_overview.md`](./dashboard/report_overview.md) | `/dashboard` | Looker Studio dashboard layout, interactions, and metrics mapping |
+| [`report_overview.md`](./dashboard/report_overview.md) | `/dashboard` | looker studio dashboard layout, interactions, and metrics mapping |
 | [`portfolio_summary.md`](./docs/portfolio_summary.md) | `/docs` | executive project summary for portfolio presentation |
 
 ## project goals
-- build a modular **Power Query ETL pipeline** for fitness tracking data  
+- build a modular **power query etl pipeline** for fitness tracking data  
 - apply **data validation logic** via dynamic rule tables  
 - produce a **clean, analytics-ready dataset** for visualization  
 - design an **interactive dashboard** showing health, activity, and recovery trends  
-- maintain full **documentation and reproducibility** via GitHub
+- maintain full **documentation and reproducibility** via github
 
 ## data overview
 | category | details |
@@ -91,21 +92,21 @@ fitness-analytics-dashboard/
 | **source** | synthetic dataset (Excel), split into raw input sheets (`WorkoutLogs`, `ActivityTracking`, `HeartRateData`, `SleepMonitoring`) |
 | **size** | ~1,600 rows combined (≈400 per sheet) |
 | **issues handled** | mixed date/time formats, inconsistent units, nulls, duplicates, missing days (calendar auto-generation), and data quality anomalies |
-| **final output** | single validated table `fitness_data_validation` containing all cleaned and enriched columns, ready for BI integration |
+| **final output** | single validated table `fitness_data_validation` containing all cleaned and enriched columns, ready for bi integration |
 
 ## tech stack
 | tool | purpose |
 |------|----------|
-| **Power Query (Excel / M Language)** | data ingestion, transformation, validation, and feature engineering |
-| **Looker Studio** | interactive dashboard creation |
-| **GitHub** | version control and technical documentation |
+| **power query (excel / m language)** | data ingestion, transformation, validation, and feature engineering |
+| **looker studio** | interactive dashboard creation |
+| **github** | version control and technical documentation |
 
 
 ## ETL architecture
 ```mermaid
 graph TD
-  A["raw excel files (WorkoutLogs, ActivityTracking, HeartRateData, SleepMonitoring)"]
-  B["Power Query functions (fx_*)"]
+  A["raw excel files (workoutlogs, activitytracking, heartratedata, sleepmonitoring)"]
+  B["power query functions (fx_*)"]
   C["staging tables (cleaned per source)"]
   D["fitness_data_base (joined by date)"]
   E["median_hr"]
@@ -113,7 +114,7 @@ graph TD
   G["validation_rules"]
   H["fitness_data_validation (rule_* + flags)"]
   I["validation sample (.xlsx)"]
-  J["Looker Studio dashboard"]
+  J["looker studio dashboard"]
 
   A --> B --> C --> D
   D --> E
@@ -131,11 +132,11 @@ graph TD
 | `fx_clean` | normalizes headers, trims text, removes empty rows |
 | `fx_date` | parses multiple date formats and Excel serials |
 | `fx_text` | cleans and standardizes text casing and punctuation |
-| `fx_number` | safely converts text/numeric inputs with locale detection |
+| `fx_number` | safely converts text/numeric inputs |
 | `fx_to_minutes` | converts durations (e.g. “1h 30m”, “90m”) to minutes |
 | `fx_to_hours` | converts durations or timestamps (e.g. “06:30”) to hours |
 | `fx_to_km` | converts distances between km, m, and miles |
-| `fx_null_or_blank` | returns TRUE if the field is null or empty string |
+| `fx_null_or_blank` | returns true if the field is null or empty string |
 | `fx_is_between` | checks if numeric values fall within inclusive ranges |
 | `fx_in_set` | checks categorical values against a reference list |
 | `fx_list_broken` | lists failed validation rules for each record |
@@ -146,12 +147,12 @@ see detailed function documentation:
 - [`/validation/functions/README.md`](./validation/functions/README.md)
 
 ## dashboard highlights
-- **tool**: Looker Studio
+- **tool**: looker studio
 - **pages**: executive overview, workout analytics, health & recovery
 - **key metrics & fields**:
   - KPI cards: total workouts, workout consistency, goal achievement
   - performance breakdown: calories/min trends, intensity structure
-  - activity & sleep trends: sleep duration analysis, resting HR trend, recovery pattern, previous-night sleep → next-day calories & workout duration
+  - activity & sleep trends: sleep duration analysis, resting hr trend, recovery pattern, previous-night sleep → next-day calories & workout duration
 - **interactions**
   - cross-filtering: selecting any chart element filters related visuals
   - month & workout type selectors + reset
@@ -163,20 +164,20 @@ see detailed function documentation:
 ## reproduce guide
 ### prerequisites
 before reproducing the project, make sure you have:
-- **Microsoft Excel 365** with **Power Query** enabled  
-- **Looker Studio (Google Data Studio)** access  
+- **microsoft excel 365** with **power query** enabled  
+- **looker studio** access  
 ### quick start
 1. **clone the repository**
    ```bash
    git clone https://github.com/<your-username>/fitness-analytics-dashboard.git
-2. **open ETL base files**
+2. **open etl base files**
   - open source sample `/data/sample/fitness_data_raw_sample.xlsx` to review the raw synthetic data
   - import all M functions from `/etl/functions` and `/validation/functions` into Power Query
   - follow transformation steps described in [`etl_walkthrough.md`](./etl/etl_walkthrough.md)
 4. **explore validation layer**
   - load `validation_rules` and follow the logic in [`validation_walkthrough.md`](./validation/validation_walkthrough.md)
   - open `/data/sample/fitness_data_validation_sample.xlsx` to view cleaned and validated records
-5. **open Dashboard in Looker Studio**
+5. **open dashboard in looker studio**
   - use the validated dataset as your data source
   - check KPI cards, trends, and filters defined in [`report_overview.md`](./dashboard/report_overview.md)
 6. **provide feedback or contribute**  
@@ -184,15 +185,15 @@ before reproducing the project, make sure you have:
      [`/.github/feature_request.md`](./.github/feature_request.md) or [`/.github/bug_report.md`](./.github/bug_report.md)
      
 ## license
-- this project is released under the **MIT License**
+- this project is released under the **mit license**
 - feel free to reuse or adapt parts of this repository for educational and analytical purposes
 
 ## connect
 **Monika Burnejko**
-*Data Analyst in Training | Excel & Power Query | BI & Automation Enthusiast*  
+*data analyst in training | excel & power query | bi & automation enthusiast*  
 📧 [monikaburnejko@gmail.com](mailto:monikaburnejko@gmail.com)  
-💼 [LinkedIn](https://www.linkedin.com/in/monika-burnejko-9301a1357)  
-🌐 [Portfolio](https://www.notion.so/monikaburnejko/Data-Analytics-Portfolio-2761bac67ca9807298aee038976f0085?pvs=9)
+💼 [linkedin](https://www.linkedin.com/in/monika-burnejko-9301a1357)  
+🌐 [portfolio](https://www.notion.so/monikaburnejko/Data-Analytics-Portfolio-2761bac67ca9807298aee038976f0085?pvs=9)
 
 ---
 <p align="center">
