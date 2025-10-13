@@ -46,7 +46,6 @@ ensuring data completeness, consistency, and logical accuracy before bi visualiz
 ## notes
 - rules are easily extendable - add new entries to `validation_rules.pq`  
 - all functions return nullable logical values (`true` / `false` / `null`)  
-- `table.buffer` usage is minimized to improve refresh performance  
 - validation summary helps monitor overall data quality and identify recurring issues
 
 📅 *last updated: october 2025*  
