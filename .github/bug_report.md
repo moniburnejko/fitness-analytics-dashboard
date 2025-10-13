@@ -1,5 +1,5 @@
 ```
-name: " bug report"
+name: "bug report"
 about: report an issue or unexpected behavior in the etl or validation pipeline
 title: "[bug] short description"
 labels: ["bug"]
