@@ -1,3 +1,6 @@
+// function: fx_null_or_blank
+// author: monika burnjko | 2025
+
 let
     // checks if a given value is null, empty string, or whitespace-only text
     fx_null_or_blank=(x as any) as logical =>
