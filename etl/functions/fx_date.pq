@@ -1,3 +1,8 @@
+// function: fx_date
+// purpose: convert diverse date formats and excel serials into proper date type, supporting multiple cultures (en-gb, en-us, pl-pl)
+// notes: ensures reliable date parsing across all raw files
+// author: monika burnejko | 2025
+
 let
     fx_date=(
         x as any,
