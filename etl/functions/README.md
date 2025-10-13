@@ -55,9 +55,7 @@ each function includes in-code comments describing the key transformation steps 
 **main actions:**
 - supports `km`, `m`, and `mi` units  
 - parses combined values like `1km 300m`  
-- optional parameters:  
-  - `default_unit` (`"km"` default, supports `"m"`, `"mi"`)  
-  - `mile_factor` (default `1.609`)
+- optional `default_unit` parameter (`"km"` default, supports `"m"`, `"mi"`)  
 
 ## general notes
 - each function includes inline comments explaining the purpose of each step.  
