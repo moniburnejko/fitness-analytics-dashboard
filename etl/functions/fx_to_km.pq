@@ -1,3 +1,8 @@
+// function: fx_to_km
+// purpose: standardize distance measures (km, m, mi) into kilometers; automatically converts miles using a fixed factor of 1.609
+// notes: used in activity tracking data
+// author: monika burnejko | 2025
+
 let
     fx_to_km=(
         x as nullable any,
