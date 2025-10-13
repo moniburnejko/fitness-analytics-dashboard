@@ -90,7 +90,7 @@ fitness-analytics-etl-bi
 ## data overview
 | category | details |
 |-----------|----------|
-| **source** | synthetic dataset (Excel), split into raw input sheets (`WorkoutLogs`, `ActivityTracking`, `HeartRateData`, `SleepMonitoring`) |
+| **source** | synthetic dataset (excel), split into raw input sheets (`WorkoutLogs`, `ActivityTracking`, `HeartRateData`, `SleepMonitoring`) |
 | **size** | ~1,600 rows combined (≈400 per sheet) |
 | **issues handled** | mixed date/time formats, inconsistent units, nulls, duplicates, missing days (calendar auto-generation), and data quality anomalies |
 | **final output** | single validated table `fitness_data_validation` containing all cleaned and enriched columns, ready for bi integration |
