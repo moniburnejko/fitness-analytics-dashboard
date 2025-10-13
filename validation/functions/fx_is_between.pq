@@ -1,3 +1,6 @@
+// function: fx_is_between
+// author: monika burnejko | 2025
+
 let
     // checks if a numeric value lies within an inclusive or exclusive range; returns null if any operand is null
     fx_is_between=(val as any, lo as any, hi as any, optional inclusive as nullable logical) as nullable logical =>
