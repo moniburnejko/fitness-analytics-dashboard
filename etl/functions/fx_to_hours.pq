@@ -1,3 +1,8 @@
+// function: fx_to_hours
+// purpose: convert mixed duration formats (e.g., 90min, 1h30m, 01:30) into numeric hours
+// notes: used in sleep data normalization
+// author: monika burnejko | 2025
+
 let
     fx_to_hours=(
         x as nullable any,
