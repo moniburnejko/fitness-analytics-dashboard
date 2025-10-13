@@ -1,3 +1,8 @@
+// function: fx_number
+// purpose: robust numeric parsing with optional handling of k-suffix (e.g., 7.8k) and percent values; normalizes separators and cleans fuzzy tokens
+// notes: used for parsing numeric fields such as calories, steps, or heart rate
+// author: monika burnejko | 2025
+
 let
     fx_number=(
         number_value as any,
