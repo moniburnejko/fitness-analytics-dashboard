@@ -1,8 +1,9 @@
 // function: fx_is_between
+// purpose: validate if a numeric value falls within a defined inclusive or exclusive range
+// notes: used for logical boundary checks (e.g., heart rate or duration)
 // author: monika burnejko | 2025
 
 let
-    // checks if a numeric value lies within an inclusive or exclusive range; returns null if any operand is null
     fx_is_between=(val as any, lo as any, hi as any, optional inclusive as nullable logical) as nullable logical =>
     let
         inc=if inclusive=null then true else inclusive,
