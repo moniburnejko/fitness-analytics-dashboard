@@ -84,9 +84,9 @@ detailed explanations of each transformation step below correspond directly to t
 **goal:** final enriched dataset.
 <br>**key steps:**
 1. generate 2024 calendar and left join to `fitness_data_base` (preserves multi-workout days)  
-2. left join `median_hr` by `workout_type`; impute `average_hr` → `median_hr`  
+2. left join `median_hr` by `workout_type`; impute `average_hr` → `average_hr_calc`  
 3. add `average_hr_imputed_flag` (`true` if imputed from median)  
-4. drop temp cols, rename `median_hr` → `average_hr`  
+4. drop temp cols, rename `average_hr_calc` → `average_hr`  
 5. derived metrics:  
    - `calories_per_minute` = calories_burned / workout_duration_min (null-safe, round 2)  
    - `workout_intensity` from `average_hr`: thresholds 140 (high), 110 (medium), else low  
