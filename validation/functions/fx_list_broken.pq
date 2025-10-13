@@ -1,8 +1,9 @@
 // function: fx_list_broken
+// purpose: aggregate validation results into a delimited string of rule names that failed for a given record
+// notes: used to generate field-level validation output summaries
 // author: monika burnejko | 2025
 
 let
-    // collects the names of all validation rules that evaluate to false, ignores nulls
     fx_list_broken=(row as record) as list =>
     let
         names=Record.FieldNames(row),
