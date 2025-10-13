@@ -1,3 +1,8 @@
+// function: fx_to_minutes
+// purpose: convert mixed duration formats (e.g., 1h30min, 90m, 01:30) into numeric minutes
+// notes: ensures uniform time representation across workout duration and activity tracking data
+// author: monika burnejko | 2025
+
 let
     fx_to_minutes=(
         x as nullable any,
