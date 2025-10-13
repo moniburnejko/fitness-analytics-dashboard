@@ -1,8 +1,7 @@
 let
     fx_to_km=(
         x as nullable any,
-        optional default_unit as nullable text,   // "km" (default), supports "m","mi"
-        optional mile_factor as nullable number   // default 1.609
+        optional default_unit as nullable text   // "km" (default), supports "m", "mi"
     ) as nullable number =>
     let
         // quick exit
@@ -21,25 +20,28 @@ let
                 w1=Text.Replace(Text.Replace(Text.Replace(Text.Replace(w0,"metres","m"),"meters","m"),"metre","m"),"meter","m"),
                 w2=Text.Replace(Text.Replace(w1,"miles","mi"),"mile","mi"),
 
-                // protect "mi" before handling bare "m"
-                p0=Text.Replace(w2," mi "," ~mi~ "),
-                p1=if Text.EndsWith(p0," mi") then Text.Start(p0,Text.Length(p0)-3)&" ~mi~" else p0,
+                // protect units to avoid splitting "mi" into "m"+"i"
+                p0=Text.Replace(w2,"mi","#MI#"),
+                p1=Text.Replace(p0,"km","#KM#"),
 
-                // add spacing around units
-                u0=Text.Replace(p1,"km"," km "),
-                u1=Text.Replace(u0,"~mi~"," mi "),
-                u2=Text.Replace(u1," m"," m "),
-                u3=if Text.EndsWith(u2,"m") then Text.Start(u2,Text.Length(u2)-1)&" m" else u2,
+                // add spacing around bare 'm'
+                m_spaced=Text.Replace(p1,"m"," m "),
+
+                // restore protected units
+                r0=Text.Replace(m_spaced,"#KM#"," km "),
+                r1=Text.Replace(r0,"#MI#"," mi "),
 
                 // collapse whitespace & tokenize
-                tokens=List.Select(Text.Split(Text.Combine(Text.SplitAny(u3," #(tab)#(cr)#(lf)")," "), " "), each _<>""),
+                tokens=List.Select(Text.Split(Text.Combine(Text.SplitAny(r1," #(tab)#(cr)#(lf)")," "), " "), each _<>""),
 
-                // helpers
-                to_num=(z as text) as nullable number => try Number.From(Text.Replace(z,",",".")) otherwise null,
+                // simple decimal parser
+                to_num=(z as text) as nullable number =>
+                    let standardized=Text.Replace(Text.Replace(z,",",".")," ","")
+                    in try Number.From(standardized) otherwise null,
+
                 n=List.Count(tokens),
                 idxs=if n=0 then {} else {0..n-1},
                 def_unit=if default_unit=null then "km" else Text.Lower(default_unit),
-                mi_fac=if mile_factor=null then 1.609 else mile_factor,
 
                 // parse <number> [unit?] -> accumulate km
                 sum_km=
@@ -53,17 +55,22 @@ let
                                     if v=null then null
                                     else if u="km" then v
                                     else if u="m" then v/1000
-                                    else if u="mi" then v*mi_fac
+                                    else if u="mi" then v*1.609
                                     else if def_unit="km" then v
                                     else if def_unit="m" then v/1000
-                                    else if def_unit="mi" then v*mi_fac
+                                    else if def_unit="mi" then v*1.609
                                     else v
                             in km)
                     in List.Sum(List.RemoveNulls(vals)),
 
-                // fallback for plain number
-                plain=try Number.From(Text.Replace(s,",",".")) otherwise null,
-                fallback=if plain=null then null else if def_unit="km" then plain else if def_unit="m" then plain/1000 else if def_unit="mi" then plain*mi_fac else plain,
+                // fallback for plain number (no explicit unit)
+                plain=try Number.From(Text.Replace(Text.Replace(s,",",".")," ","")) otherwise null,
+                fallback=
+                    if plain=null then null
+                    else if def_unit="km" then plain
+                    else if def_unit="m" then plain/1000
+                    else if def_unit="mi" then plain*1.609
+                    else plain,
 
                 // choose best
                 final=if sum_km<>null and sum_km<>0 then sum_km else fallback
