@@ -57,9 +57,10 @@ flowchart TD
   E[fitness_data_base]
   F[median_hr]
   G[fitness_data_final]
-  H[fitness_data_validation]
-  I[validation_summary]
-  Z[looker studio]
+  H[validation_rules]
+  I[fitness_data_validation]
+  J[validation_summary]
+  K[looker studio bi dashboard]
 
   A --> E
   B --> E
@@ -70,7 +71,8 @@ flowchart TD
   F --> G
   G --> H
   H --> I
-  H --> Z
+  I --> J
+  I --> K
 ```
 
 
