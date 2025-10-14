@@ -6,7 +6,7 @@ the workflow covers data ingestion, cleaning, transformation, validation, enrich
 
 ## project overview
 **etl + validation summary:**  
-for a complete overview of the data flow and outputs, see ➡️ [etl_summary.md](./etl_summary.md)
+for a complete overview of the data flow and outputs, see ➡️ [etl_summary.md](docs/etl_summary.md)
 
 ## repository structure
 ```
@@ -69,6 +69,7 @@ fitness-analytics-etl-bi/
 │       └── README.md
 │
 ├── 📁 docs/
+│   ├── etl_summary.md
 │   ├── data_dictionary.md       
 │   ├── kpi_definitions.md
 │   ├── project_overview.md      
@@ -84,13 +85,13 @@ fitness-analytics-etl-bi/
 │
 ├── LICENSE
 ├── .gitignore
-├── etl_summary.md
 └── README.md
 ```
 
 ## documentation index
 | file | description |
 |------|--------------|
+| [`etl_summary.md`](./docs/etl_summary.md) | concise overview of the etl and validation workflows and their outputs |
 | [`etl_pipeline.md`](./etl/etl_pipeline.md) | high-level overview of etl architecture and flow |
 | [`etl_walkthrough.md`](./etl/etl_walkthrough.md) | step-by-step transformation guide for all queries |
 | [`validation_walkthrough.md`](./validation/validation_walkthrough.md) | logic and structure of the validation layer |
@@ -188,7 +189,7 @@ this project is released under the **mit license**.
 feel free to reuse or adapt parts of this repository for educational and analytical purposes
 
 ## connect
-**Monika Burnejko**
+👩‍💻 **Monika Burnejko**
 <br>*data analyst in training | excel & power query | bi & automation enthusiast*  
 📧 [monikaburnejko@gmail.com](mailto:monikaburnejko@gmail.com)  
 💼 [linkedin](https://www.linkedin.com/in/monika-burnejko-9301a1357)  
