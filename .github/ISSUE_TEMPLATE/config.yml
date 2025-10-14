@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: project documentation 📄
+    url: https://github.com/moniburnejko/fitness-analytics-etl-bi/tree/main/docs
+    about: read the documentation before opening a new issue
+  - name: etl pipeline reference ⚙️ 
+    url: https://github.com/moniburnejko/fitness-analytics-etl-bi/tree/main/etl
+    about: review the etl pipeline details before reporting a transformation issue
+  - name: validation logic ✅ 
+    url: https://github.com/moniburnejko/fitness-analytics-etl-bi/tree/main/validation
+    about: review the validation rules and functions before creating a related issue
