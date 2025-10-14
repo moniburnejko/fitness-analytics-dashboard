@@ -35,5 +35,5 @@ before pushing or opening a pr:
     - 📧 [monikaburnejko@gmail.com](mailto:monikaburnejko@gmail.com)  
     - 💼 [linkedin](https://www.linkedin.com/in/monika-burnejko-9301a1357)  
 
-📅 last updated: october 2025
-👩‍💻 author: Monika Burnejko
+📅 *last updated: october 2025*  
+👩‍💻 *author: Monika Burnejko*
