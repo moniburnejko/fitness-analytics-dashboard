@@ -80,8 +80,7 @@ fitness-analytics-etl-bi/
 │   │   ├── feature_request.md
 │   │   └── config.yml
 │   ├── PULL_REQUEST_TEMPLATE.md
-│   ├── CONTRIBUTING.md
-│   └── README.md
+│   └── CONTRIBUTING.md
 │
 ├── LICENSE
 ├── .gitignore
