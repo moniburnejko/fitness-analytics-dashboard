@@ -1,53 +1,15 @@
 # etl pipeline
-this document provides an etl architecture overview and the power query data flow for the project. the pipeline ingests four excel worksheets from a single raw file, standardizes and enriches them with reusable m functions, merges them into a unified daily dataset, and prepares the final model for bi consumption. samples of the raw inputs are available in `/data/sample/fitness_data_raw_sample.xlsx`.
+this document provides a high-level overview of the power query etl (extract-transform-load) process for the **fitness analytics etl + bi** project.  
+it describes the architecture, logical flow, and key components used to transform fragmented fitness tracking data into a clean, analytics-ready dataset.
 
-## data sources
-- **workoutlogs** - per-workout records (date, workout_type, duration, calories)
-- **activitytracking** - daily activity (date, steps, distance_km, active_minutes)
-- **sleepmonitoring** - daily sleep (date, sleep_hours)
-- **heartratedata** - daily heart rate (date, average_hr, max_hr, resting_hr)
-> raw sheets are read from a single file: `fitness_data_2024_raw.xlsx` (samples in `/data/sample/fitness_data_raw_sample.xlsx`)
+## overview
+the etl pipeline integrates four raw data sources — workouts, activity, sleep, and heart rate — from a single excel file:  
+[`/data/sample/fitness_data_raw_sample.xlsx`](../data/sample/fitness_data_raw_sample.xlsx).  
 
-## transformation structure (queries)
-- **workoutlogs**  
-  clean + normalize text; parse dates; map workout_type to canonical labels; convert duration to minutes; parse calories; enforce types; remove duplicates.
-- **activitytracking**  
-  clean; parse dates; steps via `fx_number(_, true, false)` (k-suffix enabled); distance to km; active minutes to integer; sort + dedupe by date.
-- **sleepmonitoring**  
-  clean; parse dates; convert sleep durations to hours (supports `hh:mm[:ss]`); sort + dedupe by date.
-- **heartratedata**  
-  clean; parse dates; parse hr metrics to numbers; group by date with rules: average/resting → rounded average; max → maximum.
-- **fitness_data_base**  
-  nested joins by date to combine activity/hr/sleep with workouts; per-day logic: if any workout exists that day → keep only rows with a nonblank `workout_type`; otherwise keep all rows; cast final types.
-- **median_hr**  
-  compute median `average_hr` per `workout_type` (rounded to int).
-- **fitness_data_final**  
-  left join calendar (2024) to base; impute `average_hr` from per-type median (with `average_hr_imputed_flag`); derive metrics: `calories_per_minute`, `workout_intensity`, `sleep_duration_group`, `steps_goal_pct`, `steps_goal_achieved_flag`; `sleep_previous_night` via index/shift; add calendar attributes (month/dow/quarter); final casting and column order.
+through a series of standardized transformations, these sources are cleaned, normalized, merged, and enriched into one unified dataset:  
+**`fitness_data_final`**, later validated in the [`/validation`](../validation) stage before visualization in looker studio.
 
-## functions used (etl)
-- **fx_clean** - remove empty rows, trim text cells, normalize headers to snake_case.
-- **fx_text** - clean whitespace/control chars, normalize punctuation, casing control.
-- **fx_number** - robust numeric parsing with k/% (opt-in flags), separator unification, fuzzy token cleanup.
-- **fx_date** - typed/date/datetime fast paths, excel serials, iso-like parsing, culture-backed `date.fromtext` (default priority: `{"en-GB","en-US","pl-PL"}`).
-- **fx_to_minutes** - parse `hh:mm[:ss]`, `1h30min`, `90min` → minutes.
-- **fx_to_hours** - parse `hh:mm[:ss]`, `1h30m`, `90min` → hours.
-- **fx_to_km** - parse `km/m/mi`, glued forms allowed, miles fixed at `× 1.609`.
-> note on types: final casts use `"en-US"` culture to ensure dot decimal handling is consistent across systems.
-
-## m query files
-all power query m scripts are stored under `/etl/queries/`.  
-file naming mirrors query names, e.g.: `workoutlogs.pq`, `activitytracking.pq`, `sleepmonitoring.pq`, `heartratedata.pq`, `fitness_data_base.pq`, `median_hr.pq`, `fitness_data_final.pq`.
-
-## validation (brief)
-after `fitness_data_final`, a validation stage checks completeness and logical bounds and produces outputs illustrated in `/data/sample/fitness_data_validation_sample.xlsx`. details live under `/validation/`. 
-components:
-- **validation functions:** `fx_null_or_blank`, `fx_is_numeric`, `fx_is_between`, `fx_in_set`, `fx_list_broken`
-- **validation_rules:** parameterized table of rules in `/validation/`
-- **fitness_data_validation:** per-row, per-rule results
-- **validation_summary:** rule-level and field-level aggregates
-see: `/validation/validation_walkthrough.md` for the full validation workflow.
-
-## data flow
+## etl architecture
 ```mermaid
 flowchart TD
   A[workoutlogs]
@@ -75,6 +37,62 @@ flowchart TD
   I --> K
 ```
 
+## etl logic components
+| component | location | description |
+|------------|-----------|-------------|
+| **etl functions** | [`/etl/functions`](./functions) | reusable m-language scripts for cleaning, parsing, and standardization (e.g., `fx_clean`, `fx_date`, `fx_number`, `fx_text`). |
+| **etl queries** | [`/etl/queries`](./queries) | main transformation logic: imports, cleans, joins, and aggregates raw sheets into unified datasets. |
+| **raw data** | [`/data/sample/fitness_data_raw_sample.xlsx`](../data/sample/fitness_data_raw_sample.xlsx) | input file containing 4 worksheets: `WorkoutLogs`, `ActivityTracking`, `SleepMonitoring`, and `HeartRateData`. |
+| **output dataset** | [`fitness_data_final`](./queries/fitness_data_final.pq) | final table containing standardized, enriched daily metrics ready for validation. |
+
+## etl flow
+1. **source loading**  
+   - imports four excel worksheets and promotes headers  
+   - uses `fx_clean` to standardize header names and trim text cells  
+2. **cleaning & normalization**  
+   - converts raw text, numeric, and date fields into consistent formats  
+   - uses helper functions:  
+     - `fx_date` – parses multiple date formats and excel serials  
+     - `fx_number` – standardizes numeric input, handles `k` suffix and `%`  
+     - `fx_to_minutes`, `fx_to_hours`, `fx_to_km` – converts mixed-unit data to consistent numeric scales  
+     - `fx_text` – normalizes casing, whitespace, and punctuation  
+3. **merging & enrichment**  
+   - joins daily tables (`WorkoutLogs`, `ActivityTracking`, `HeartRateData`, `SleepMonitoring`) by `date`  
+   - computes per-day metrics (duration, calories, steps, sleep, hr averages)  
+   - ensures one-to-many structure is handled via left joins  
+4. **aggregation & imputation**  
+   - creates a median table (`median_hr`) to fill missing heart rate values per workout type  
+   - imputes missing average HR values when valid median exists  
+   - derives calculated columns (`calories_per_minute`, `steps_goal_pct`, `workout_intensity`, etc.)  
+5. **calendar integration**  
+   - adds a full date dimension (2024) to ensure continuous daily coverage  
+   - includes additional columns: `month_name`, `quarter_name`, `day_of_week`, and others  
+6. **validation handoff**  
+   - the resulting table `fitness_data_final` is used as input for the validation process  
+   - validation rules and functions are defined in [`/validation`](../validation)  
+   - output from validation includes:  
+     - `fitness_data_validation` – full dataset with applied rules  
+     - `validation_summary` – aggregated error and completeness overview  
+
+## output datasets
+| dataset | description |
+|----------|-------------|
+| **fitness_data_final** | complete, standardized daily dataset ready for validation and reporting. |
+| **fitness_data_validation** | extended version of `fitness_data_final` with validation flags and rule results (see `/validation`). |
+| **validation_summary** | aggregated validation report summarizing data quality status. |
+
+sample outputs available in:  
+[`/data/sample/fitness_data_validation_sample.xlsx`](../data/sample/fitness_data_validation_sample.xlsx)
+
+## related documentation
+- [**etl walkthrough**](./etl_walkthrough.md) – detailed step-by-step guide for each transformation stage  
+- [**validation walkthrough**](../validation/validation_walkthrough.md) – post-etl validation process  
+- [**etl functions**](./functions) – reusable helper scripts  
+- [**etl queries**](./queries) – all core transformation scripts  
+
+## notes
+- data buffering (`Table.Buffer`) is used selectively for performance where required.  
+- etl logic is modular and can be easily extended to additional data sources or metrics.  
 
 📅 *last updated: october 2025*  
 👩‍💻 *author: Monika Burnejko*
