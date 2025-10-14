@@ -1,117 +1,127 @@
 # etl walkthrough
-this document provides a step-by-step transformation guide for the etl pipeline. it follows the flow from raw excel sheets through cleaning, normalization, merging, imputation, and feature enrichment to the final dataset used by bi. validation is covered separately (see `/validation/validation_walkthrough.md`).
+this document provides a detailed, step-by-step explanation of the power query etl (extract-transform-load) process used in the **fitness analytics etl + bi** project.  
+it covers each transformation query, its logic, and how the final dataset `fitness_data_final` is constructed before validation and bi reporting.
 
-## input sources
-- single excel file: `fitness_data_2024_raw.xlsx`  
-  worksheets: `workoutlogs`, `activitytracking`, `sleepmonitoring`, `heartratedata`  
-  sample raw extract: `/data/sample/fitness_data_raw_sample.xlsx`
+## overview
+the etl process transforms raw, fragmented fitness tracking data into a structured and analytics-ready dataset.  
+it begins with four source sheets from one file — [`fitness_data_2024_raw.xlsx`](../data/sample/fitness_data_raw_sample.xlsx) - and ends with a clean, validated table that integrates workouts, activity, sleep, and heart rate metrics.
 
-## common cleaning and standardization
-- **headers & cells:** `fx_clean` trims text cells, removes empty rows, and converts headers to lowercase snake_case (e.g., `Workout Duration (min)` → `workout_duration_min`).
-- **dates:** `fx_date` handles typed values, excel serials, iso-like formats; culture-priority default `{"en-GB","en-US","pl-PL"}`.
-- **numbers:** `fx_number` normalizes whitespace, accepts `.`/`,` as decimal, supports `k` and `%` (opt-in), cleans fuzzy tokens (like `~`, `≈`).
-- **text:** `fx_text` collapses whitespace and standardizes punctuation; casing control via parameter.
-- **units/time:** `fx_to_minutes`, `fx_to_hours`, `fx_to_km` convert mixed textual inputs to canonical numeric values.
+the final output, `fitness_data_final`, is then passed to the validation stage (`/validation`), where data quality checks are performed before visualization in looker studio.
 
 ## transformations by query
-detailed explanations of each transformation step below correspond directly to the m queries stored in  
-[`/etl/queries`](./queries) - each file includes a header comment with its purpose and source mapping.
+> for full m-code scripts, see [`/etl/queries`](./queries))
 
-### 1) workoutlogs
-**goal:** produce clean per-workout records with normalized types.  
-**key steps:**
-1. source + headers → `fx_clean`
-2. `date` → `fx_date`
-3. `workout_type` → `fx_text("lower")`, remove `" session"`, collapse spaces, map to canonical labels (e.g., `walk`→`Walking`, `hiit`→`HIIT`)
-4. `workout_duration_min` → `fx_to_minutes`
-5. `calories_burned` → `fx_number`
-6. if `workout_type` is blank → nullify duration & calories (avoid fake entries)
-7. cast numeric columns (`Int64` where appropriate), `Table.Distinct` for full-row duplicates
-**outputs:** one row per workout with consistent types and labels.
+### 1. workoutlogs
+- **source:** `workoutlogs` sheet from `fitness_data_2024_raw.xlsx`  
+- **purpose:** cleans and standardizes all workout data.  
+- **key operations:**
+  - cleans headers and trims text using `fx_clean`
+  - parses `date` using `fx_date`  
+  - normalizes `workout_type` via custom text mapping (e.g., `hiit`, `cycling`, `running`)  
+  - converts `workout_duration_min` to minutes via `fx_to_minutes`  
+  - standardizes `calories_burned` with `fx_number`  
+  - replaces nulls when no valid `workout_type` is available  
+  - casts final numeric columns and removes duplicates
+- **output:** cleaned, standardized workout data ready for merging.
 
-### 2) activitytracking
-**goal:** normalize daily activity.  
-**key steps:**
-1. clean + `fx_date`  
-2. `steps` → `fx_number(_, true, false)` (k-suffix enabled; integers via `RoundDown`)  
-3. `distance_km` → `fx_to_km(_, "km")`, round(2)  
-4. `active_minutes` → `fx_to_minutes` → `RoundDown`  
-5. cast types; sort + `Table.Distinct` by `date`  
-**outputs:** one row per date with daily steps, distance_km, active_minutes.
+### 2. activitytracking
+- **source:** `activitytracking` sheet  
+- **purpose:** prepares step, distance, and active time metrics.  
+- **key operations:**
+  - cleans headers and text via `fx_clean`  
+  - parses `date` with `fx_date`  
+  - standardizes `steps` using `fx_number` with `allow_k = true` (supports e.g., `7.8K`)  
+  - converts `distance_km` with `fx_to_km` (handles `m`, `km`, `mi`)  
+  - transforms `active_minutes` using `fx_to_minutes`  
+  - sorts and deduplicates by date  
+- **output:** daily step and activity metrics standardized to consistent units.
 
-### 3) sleepmonitoring
-**goal:** normalize daily sleep.  
-**key steps:**
-1. clean + `fx_date`  
-2. `sleep_hours` → `fx_to_hours`, round(1)  
-3. cast types; sort + `Table.Distinct` by `date`
-**outputs:** one row per date with `sleep_hours`.
+### 3. sleepmonitoring
+- **source:** `sleepmonitoring` sheet  
+- **purpose:** cleans and standardizes sleep duration records.  
+- **key operations:**
+  - cleans headers and trims text via `fx_clean`  
+  - parses `date` with `fx_date`  
+  - converts `sleep_hours` to hours via `fx_to_hours` (handles `1:30`, `90m`, etc.)  
+  - sorts and deduplicates by date
+- **output:** clean, daily sleep data in consistent hourly format.
 
-### 4) heartratedata
-**goal:** consolidate daily heart rate metrics.  
-**key steps:**
-1. clean + `fx_date`  
-2. parse `average_hr`, `max_hr`, `resting_hr` via `fx_number`  
-3. `Table.Group` by `date`:  
-   - `average_hr`: rounded average of non-null values  
-   - `max_hr`: maximum of non-null values  
-   - `resting_hr`: rounded average of non-null values  
-4. sort by date
-**outputs:** one row per date with consolidated hr metrics.
+### 4. heartratedata
+- **source:** `heartratedata` sheet  
+- **purpose:** prepares heart rate statistics and aggregates duplicates.  
+- **key operations:**
+  - cleans headers via `fx_clean`  
+  - parses `date` with `fx_date`  
+  - converts `average_hr`, `max_hr`, and `resting_hr` via `fx_number`  
+  - groups by `date` and aggregates:  
+    - `average_hr` → rounded mean  
+    - `max_hr` → maximum  
+    - `resting_hr` → rounded mean  
+  - sorts chronologically  
+- **output:** daily heart rate statistics, one record per date.
 
-### 5) fitness_data_base
-**goal:** merge daily measures with workouts while avoiding duplicate empty rows on workout days.  
-**key steps:**
-1. `NestedJoin` by `date` to attach activity, hr, sleep to workouts (expand only needed cols; do not expand right-side `date`)  
-2. find dates that have any nonblank `workout_type` → create list `dates_with_workout`  
-3. add `has_workout` flag (`List.Contains(dates_with_workout, [date])`)  
-4. filter:  
-   - if `has_workout = true` → keep only rows with nonblank `workout_type`  
-   - else → keep all rows  
-5. cast final types
-**outputs:** daily-level table preserving workouts where they exist and full daily rows where they do not.
+### 5. fitness_data_base
+- **purpose:** merges all cleaned datasets into one unified base table.  
+- **key operations:**
+  - joins `workoutlogs`, `activitytracking`, `heartratedata`, and `sleepmonitoring` by `date` using nested joins  
+  - keeps all workouts (one-to-many) while merging daily data  
+  - ensures that only rows with real workout data are retained for days containing any workout  
+  - enforces consistent data types for all key columns  
+  - removes intermediate flags  
+- **output:** integrated base table combining all metrics for each workout or rest day.
 
-### 6) median_hr
-**goal:** compute per-type median for hr imputation.  
-**key steps:**
-1. select `workout_type`, `average_hr`  
-2. filter out blanks and nulls  
-3. group by `workout_type`, compute `List.Median(average_hr)`  
-4. round to integer (`Int64`)
-**outputs:** lookup table `{workout_type → median_hr}`.
+### 6. median_hr
+- **purpose:** computes median heart rate per workout type for imputation.  
+- **key operations:**
+  - groups `fitness_data_base` by `workout_type`  
+  - calculates median `average_hr` across all valid records  
+  - rounds result to nearest integer  
+- **output:** lookup table for missing heart rate imputation.
 
-### 7) fitness_data_final
-**goal:** final enriched dataset.
-<br>**key steps:**
-1. generate 2024 calendar and left join to `fitness_data_base` (preserves multi-workout days)  
-2. left join `median_hr` by `workout_type`; impute `average_hr` → `average_hr_calc`  
-3. add `average_hr_imputed_flag` (`true` if imputed from median)  
-4. drop temp cols, rename `average_hr_calc` → `average_hr`  
-5. derived metrics:  
-   - `calories_per_minute` = calories_burned / workout_duration_min (null-safe, round 2)  
-   - `workout_intensity` from `average_hr`: thresholds 140 (high), 110 (medium), else low  
-   - `sleep_duration_group`: `<6h`, `6–8h`, `>8h`  
-   - `steps_goal_pct` = steps / 10,000 × 100; `steps_goal_achieved_flag` (≥ 100%)  
-   - `sleep_previous_night`: index + shifted list  
-6. temporal attributes: month name/number/start, day-of-week name/number (monday=1), quarter  
-7. final casting with `"en-US"` culture and column order
-**outputs:** single, analytics-ready fact table
+### 7. fitness_data_final
+- **purpose:** builds the complete daily dataset, integrating all metrics and derived columns.  
+- **key operations:**
+  - **calendar generation** – creates a continuous daily range for 2024  
+  - **join with base** – merges the calendar with `fitness_data_base`  
+  - **median imputation** – fills null `average_hr` using `median_hr` per workout type  
+  - **derived metrics:**  
+     - `calories_per_minute` = calories ÷ duration  
+     - `workout_intensity` based on `average_hr` thresholds  
+     - `sleep_duration_group` = `short`, `optimal`, `long`  
+     - `steps_goal_pct` and `steps_goal_achieved_flag`  
+     - `sleep_previous_night` via date offset lookup  
+  - **temporal grouping:** adds month, quarter, and weekday columns  
+  - **final casting and reordering**
+- **output:**  
+`fitness_data_final` – complete daily dataset combining all health metrics, ready for validation and dashboard use.
 
-## final dataset structure (selected columns)
-- keys & calendar: `date`, `day_of_week_name`, `day_of_week_number`, `month_name`, `month_number`, `month_start_date`, `quarter_name`  
-- workouts: `workout_type`, `workout_duration_min`, `calories_burned`, `calories_per_minute`, `workout_intensity`  
-- heart rate: `average_hr`, `average_hr_imputed_flag`, `max_hr`, `resting_hr`  
-- activity: `active_minutes`, `distance_km`, `steps`, `steps_goal_pct`, `steps_goal_achieved_flag`  
-- sleep: `sleep_hours`, `sleep_duration_group`, `sleep_previous_night`
+## key transformation logic
+| stage | description | main functions |
+|--------|--------------|----------------|
+| **cleaning** | removes nulls, trims text, normalizes headers | `fx_clean`, `fx_text`, `fx_null_or_blank` |
+| **parsing** | converts raw text to structured date/number/time formats | `fx_date`, `fx_number`, `fx_to_minutes`, `fx_to_hours`, `fx_to_km` |
+| **merging** | joins related sources by date with nested joins | built-in joins + `Table.ExpandTableColumn` |
+| **aggregation** | computes medians, averages, and grouped stats | `Table.Group`, `List.Median`, `List.Average` |
+| **enrichment** | adds derived metrics and calendar attributes | `Date.*` and custom expressions |
 
-## validation
-after `fitness_data_final`, validation rules are applied to produce detailed results and a summary. samples are illustrated in `/data/sample/fitness_data_validation_sample.xlsx`. details live in `/validation/`:
-- functions: `fx_null_or_blank`, `fx_is_numeric`, `fx_is_between`, `fx_in_set`, `fx_list_broken`
-- `validation_rules` (configurable rules per field)
-- `fitness_data_validation` (row-level rule outcomes)
-- `validation_summary` (aggregated results)
-<br>see: [`validation_walkthrough.md`](validation_walkthrough.md).
+## output tables
+| table | description |
+|--------|-------------|
+| **fitness_data_base** | merged and standardized intermediate dataset combining all sources. |
+| **median_hr** | lookup table for heart rate imputation by workout type. |
+| **fitness_data_final** | final enriched dataset used for validation and bi reporting. |
 
+sample outputs available in [`/data/sample/fitness_data_validation_sample.xlsx`](../data/sample/fitness_data_validation_sample.xlsx).
+
+## related documentation
+- [**etl pipeline overview**](./etl_pipeline.md)  
+- [**etl queries**](./queries)  
+- [**etl functions**](./functions)  
+- [**validation walkthrough**](../validation/validation_walkthrough.md)
+
+## notes
+- buffering is applied only when needed for stable joins.  
+- etl flow is modular and can be extended to additional sources or metrics.  
 
 📅 *last updated: october 2025*  
 👩‍💻 *author: Monika Burnejko*
