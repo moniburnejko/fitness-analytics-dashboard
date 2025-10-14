@@ -1,11 +1,85 @@
 blank_issues_enabled: false
+
 contact_links:
-  - name: project documentation 📄
-    url: https://github.com/moniburnejko/fitness-analytics-etl-bi/tree/main/docs
-    about: read the documentation before opening a new issue
-  - name: etl pipeline reference ⚙️ 
-    url: https://github.com/moniburnejko/fitness-analytics-etl-bi/tree/main/etl
-    about: review the etl pipeline details before reporting a transformation issue
-  - name: validation logic ✅ 
-    url: https://github.com/moniburnejko/fitness-analytics-etl-bi/tree/main/validation
-    about: review the validation rules and functions before creating a related issue
+  - name: 💬 general questions or feedback
+    url: https://github.com/moniburnejko/fitness-analytics-etl-bi/discussions
+    about: start a discussion if you have a question, idea, or general feedback about the project.
+
+issue_templates:
+  - name: 🐛 bug report
+    description: report a bug or error in the etl, validation, or dashboard logic
+    labels: ["bug", "triage"]
+    title: "[BUG] short description of the issue"
+    body:
+      - type: markdown
+        attributes:
+          value: |
+            ### thank you for helping improve the project!
+            please provide as much context as possible below.
+      - type: input
+        id: summary
+        attributes:
+          label: brief summary
+          description: describe the problem in one sentence
+        validations:
+          required: true
+      - type: textarea
+        id: steps
+        attributes:
+          label: steps to reproduce
+          description: list the exact steps that lead to the issue
+        validations:
+          required: true
+      - type: textarea
+        id: expected
+        attributes:
+          label: expected behavior
+          description: what should have happened?
+      - type: textarea
+        id: actual
+        attributes:
+          label: actual behavior
+          description: what actually happened?
+      - type: input
+        id: environment
+        attributes:
+          label: environment details
+          description: excel version, os, or power query configuration
+      - type: textarea
+        id: additional
+        attributes:
+          label: additional context or screenshots
+          description: add any supporting information (optional)
+
+  - name: ✨ feature request
+    description: suggest a new feature or improvement for etl, validation, or dashboard components
+    labels: ["enhancement"]
+    title: "[FEATURE] short description of your idea"
+    body:
+      - type: markdown
+        attributes:
+          value: |
+            ### got an idea? awesome!  
+            please share what you'd like to add or improve.
+      - type: input
+        id: summary
+        attributes:
+          label: feature summary
+          description: describe the feature in one or two sentences
+        validations:
+          required: true
+      - type: textarea
+        id: motivation
+        attributes:
+          label: motivation
+          description: why is this feature important or useful?
+      - type: textarea
+        id: implementation
+        attributes:
+          label: possible implementation
+          description: how could this feature be added? (optional)
+      - type: textarea
+        id: extra
+        attributes:
+          label: additional context or examples
+          description: link to relevant markdown, queries, or screenshots (optional)
