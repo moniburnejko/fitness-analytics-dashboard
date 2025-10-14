@@ -29,6 +29,11 @@ before pushing or opening a pr:
 - compare row counts and null counts with previous versions  
 - verify that validation summary output remains consistent  
 
-## contact
-project author: **monika burnejko**  
-for feedback or collaboration ideas, open a discussion or issue on github.
+## communication
+-	questions and ideas are always welcome!
+  -	open a discussion via issues or contact the author directly: 
+    - 📧 [monikaburnejko@gmail.com](mailto:monikaburnejko@gmail.com)  
+    - 💼 [linkedin](https://www.linkedin.com/in/monika-burnejko-9301a1357)  
+
+📅 last updated: october 2025
+👩‍💻 author: Monika Burnejko
