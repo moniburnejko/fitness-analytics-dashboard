@@ -1,52 +1,47 @@
 # validation
-this folder contains the data validation layer of the fitness analytics project.  
-it extends the etl pipeline by applying a rule-based validation framework to the `fitness_data_final` dataset,  
-ensuring data completeness, consistency, and logical accuracy before bi visualization.
+this folder contains the full power query data validation process for the **fitness analytics etl + bi** project.  
+it defines and executes data quality rules applied to the final etl output (`fitness_data_final`) before dashboard visualization.
+
+the validation process ensures completeness, consistency, and logical accuracy across all fitness metrics, producing both detailed and aggregated quality reports.
 
 ## folder structure
 | path | description |
 |------|--------------|
-| [`validation_walkthrough.md`](validation_walkthrough.md) | detailed documentation of the validation process, rule logic, and function behavior |
-| [`/functions`](functions) | reusable m-language validation functions for rule execution |
-| [`/queries`](queries) | main validation scripts (.pq) for rule definition, record-level results, and summary reporting |
+| [`validation_walkthrough.md`](validation_walkthrough.md) | detailed explanation of the validation logic, flow, and output structure |
+| [`/functions`](functions) | reusable helper functions for rule evaluation and null or range checks |
+| [`/queries`](queries) | main validation queries (.pq): rule definitions, validation engine, and summary aggregation |
 
-## validation process
-1. **rule definition**  
-   - all rules are defined in [`validation_rules.pq`](queries/validation_rules.pq)  
-   - each rule specifies:  
-     - `rule_name` - unique rule identifier  
-     - `target_column` - column to validate  
-     - `rule_type` - validation logic type (e.g. `NotNull`, `BetweenInc`, `InSet`)  
-     - `param1`, `param2` - rule parameters  
-     - `severity` - `Error` or `Warn`  
-2. **function execution**  
-   - rules are applied using modular validation functions in [`/functions`](functions):  
-     - `fx_null_or_blank` - completeness checks  
-     - `fx_is_numeric` - numeric type validation  
-     - `fx_is_between` - range validation  
-     - `fx_in_set` - categorical membership validation  
-     - `fx_list_broken` - aggregates rule violations for reporting  
-3. **validation output**  
-   - [`fitness_data_validation.pq`](queries/fitness_data_validation.pq) - record-level validation results  
-   - [`validation_summary.pq`](queries/validation_summary.pq) - aggregated summary by rule, column, and severity  
-4. **integration with etl**  
-   - validation operates on `fitness_data_final` (output from `/etl/`)  
-   - results are exported as `fitness_data_validation` and `validation_summary` tables  
-   - sample outputs are available in:  
-     [`/data/sample/fitness_data_validation_sample.xlsx`](../data/sample/fitness_data_validation_sample.xlsx)
+## validation inputs
+- **input dataset:** `fitness_data_final` (output from the etl pipeline)  
+- **rule definitions:** [`validation_rules.pq`](queries/validation_rules.pq)  
+- **sample input file:** [`/data/sample/fitness_data_raw_sample.xlsx`](../data/sample/fitness_data_raw_sample.xlsx)
 
-## documentation links
-- **etl pipeline overview:** [`/etl_pipeline.md`](../etl_pipeline.md)  
-  → describes how validation connects to the main data flow  
-- **etl walkthrough:** [`/etl_walkthrough.md`](../etl_walkthrough.md)  
-  → explains transformations preceding validation  
-- **validation walkthrough:** [`validation_walkthrough.md`](validation_walkthrough.md)  
-  → full step-by-step logic of rule application and summary aggregation
+## validation outputs
+- **record-level dataset:** `fitness_data_validation`  
+  - includes all columns from `fitness_data_final`  
+  - adds `rule_*`, `broken_rules`, `has_error`, `has_warn`, `data_validation_flag`, and `data_completeness`  
+- **summary dataset:** `validation_summary`  
+  - aggregates validation and completeness results by category  
+- **sample output file:** [`/data/sample/fitness_data_validation_sample.xlsx`](../data/sample/fitness_data_validation_sample.xlsx)
+
+## process summary
+1. **load rules and dataset** – imports rule table (`validation_rules`) and final ETL output  
+2. **apply validation functions** – evaluates each record using `fx_null_or_blank`, `fx_is_between`, `fx_in_set`, and others  
+3. **generate rule results** – creates logical columns (`rule_*`) per validation rule  
+4. **derive flags** – computes `has_error`, `has_warn`, and `data_validation_flag`  
+5. **assess completeness** – marks rows as `complete` or `incomplete` based on required fields  
+6. **aggregate results** – produces the `validation_summary` table with record counts and percentages
+
+## related documentation
+- [**etl pipeline overview**](../etl/etl_pipeline.md)  
+- [**etl walkthrough**](../etl/etl_walkthrough.md)  
+- [**validation walkthrough**](./validation_walkthrough.md)  
+- [**validation functions**](./functions)  
+- [**validation queries**](./queries)
 
 ## notes
-- rules are easily extendable - add new entries to `validation_rules.pq`  
-- all functions return nullable logical values (`true` / `false` / `null`)  
-- validation summary helps monitor overall data quality and identify recurring issues
+- validation logic is modular and easily extendable through new rules in `validation_rules.pq`.  
+- this step is the final stage before bi visualization in looker studio.
 
 📅 *last updated: october 2025*  
-👩‍💻 *author: Monika Burnejko*
+👩‍💻 *author: monika burnejko*
