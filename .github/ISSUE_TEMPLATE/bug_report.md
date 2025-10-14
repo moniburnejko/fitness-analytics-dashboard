@@ -1,33 +1,44 @@
 ---
-name: "bug report 🐛"
-about: report an issue or unexpected behavior in the etl or validation pipeline
-title: "[bug] short description"
-labels: ["bug"]
-assignees: ""
+name: 🐛 bug report
+about: report a bug or error in the etl, validation, or dashboard logic
+title: "[BUG] short description of the issue"
+labels: ["bug", "triage"]
 ---
 
-### description
-clearly describe the issue you encountered.  
-include what you expected to happen vs what actually happened.
+## summary
+clearly describe what went wrong.
 
-### steps to reproduce
-1. open query or function:  
-   `path/to/query_or_function.pq`
-2. perform:  
-   ...
-3. observe error:  
-   ...
+**example:**
+- fx_to_km converts miles incorrectly for small values
+- validation_summary fails with Expression.Error on null lists
 
-### expected behavior
-describe the correct or intended result.
+## steps to reproduce
+list the exact steps that trigger the issue:
+1. open `/etl/queries/fitness_data_final.pq`
+2. apply function `fx_to_km` on `distance_km` column  
+3. observe incorrect conversion results
 
-### actual behavior
-paste or summarize the incorrect output, error message, or log entry.
+## expected behavior
+describe what should have happened.
 
-### environment
-- operating system
-- file or query: [e.g. `/etl/queries/fitness_data_final.pq`]
-- last modified: [commit id or date]
+**example:** 
+- distance should be converted from miles to km using factor 1.609
 
-### additional context
-include screenshots, error details, or reference links if helpful.
+## actual behavior
+describe what actually happens, including error messages if any.  
+
+**example:**
+- 7.39 mi → 0.01 km (incorrect)
+- 1.87 mi → 0 (incorrect)
+
+## environment
+- **operating system** 
+- **excel / power query version**
+- **related file(s)** (eg. `/etl/functions/fx_to_km.pq`, `/etl/queries/fitness_data_final.pq`)
+
+## additional context
+add screenshots, logs, or notes if relevant.  
+*(optional but appreciated)*
+
+📅 *last updated: october 2025*  
+👩‍💻 *author: Monika Burnejko*
