@@ -1,4 +1,4 @@
-# queries
+# etl queries
 this folder contains all power query m scripts (.pq) used in the etl pipeline.  
 each file represents a transformation stage within the data flow - from raw input sheets to the final analytics-ready dataset.
 
