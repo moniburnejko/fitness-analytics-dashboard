@@ -153,7 +153,7 @@ flowchart TD
 
 ## dashboard highlights
 - **tool:** looker studio  
-- **main views:** overview, performance breakdown, health & recovery  
+- **main views:** performance panel, workout analytics, health & recovery  
 - **interactivity:** cross-filtering, segment drill-downs, month/workout filters  
 - **kpis:** total workouts, goal achievement %, workout consistency  
 - **trends:** calories/min, resting hr, sleep pattern, recovery correlation  
