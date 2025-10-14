@@ -1,25 +1,35 @@
-# pull request
-### summary
-describe the change you are proposing.  
-include whether it affects etl logic, validation, or documentation.
+# pull request template
+thank you for contributing to the **fitness analytics etl + bi** project!  
+please complete the following sections before submitting your pull request.
 
-### type of change
-- [ ] bug fix  
-- [ ] new feature  
-- [ ] documentation update  
-- [ ] performance improvement  
-- [ ] refactor / cleanup  
+## description
+briefly describe what this pull request changes or adds.  
 
-### related files
-list key files or folders affected by this change  
-(e.g. `/etl/functions/fx_number.pq`, `/validation/queries/validation_summary.pq`)
+**example:**
+- added new validation rule for resting_hr  
+- updated fx_number to handle empty strings safely  
+- optimized joins in fitness_data_base query
 
-### testing & verification
-describe how you tested this change  
-(e.g. refreshed queries, checked validation results, compared metrics)
+## changes summary
+| type | details |
+|------|----------|
+| **added** | |
+| **updated** | |
+| **fixed** | |
+| **removed** | |
 
-### checklist
-- [ ] code runs without errors  
-- [ ] naming conventions follow snake_case  
-- [ ] comments and headers are updated  
-- [ ] documentation links verified  
+## testing
+describe how you tested the changes:
+- [ ] tested Power Query `.pq` files in Excel  
+- [ ] verified expected output in sample dataset  
+- [ ] confirmed no errors in validation layer  
+- [ ] checked Looker Studio connection works correctly  
+
+## checklist before submitting
+- [ ] code and documentation use consistent naming (snake_case)  
+- [ ] comments describe each key step briefly and clearly  
+- [ ] markdown files follow lowercase style and proper linking  
+- [ ] tested with both `/data/sample/fitness_data_raw_sample.xlsx` and `/validation` logic  
+
+📅 *last updated: october 2025*  
+👩‍💻 *author: Monika Burnejko*
