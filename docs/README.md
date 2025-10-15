@@ -4,24 +4,27 @@ it includes high-level overviews, technical descriptions, and metadata supportin
 
 ## purpose
 the `/docs` directory centralizes all descriptive and reference materials used throughout the project:
-- summarizes the etl and validation workflows  
-- defines data structures and kpi logic  
-- provides business and analytical context for bi visualization  
+- summarizes the **etl and validation** workflows  
+- defines **data structures and kpi logic**  
+- provides **business and analytical context** for the bi visualization  
+- documents the **dashboard structure, interactions, and metrics** through `dashboard_summary.md`  
 
 ## folder contents
 | file | description |
 |------|--------------|
-| [`etl_summary.md`](etl_summary.md) | concise overview of the full etl + validation process and its outputs |
-| [`data_dictionary.md`](data_dictionary.md) | detailed description of each dataset column, including validation fields |
-| [`kpi_definitions.md`](kpi_definitions.md) | formal definitions and calculation logic for all metrics used in the dashboard |
-| [`project_overview.md`](project_overview.md) | general introduction and project background for portfolio or presentation use |
+| [`etl_summary.md`](etl_summary.md) | summary of the power query etl and validation process |
+| [`dashboard_summary.md`](dashboard_summary.md) | overview of the looker studio dashboard structure, metrics, and interactions |
+| [`data_dictionary.md`](data_dictionary.md) | column-level metadata with descriptions and data types |
+| [`kpi_definitions.md`](kpi_definitions.md) | concise list of all kpis (etl + looker studio) with logic references |
+| [`project_overview.md`](project_overview.md) | full analytical and technical overview of the project scope, goals, and workflow |
 
 ## recommended reading order
 for the best understanding of the project’s flow, review the documentation in this order:
-1. **[`project_overview.md`](project_overview.md)** - introduction to project goals, scope, and business context  
-2. **[`etl_summary.md`](etl_summary.md)** - overview of the end-to-end etl and validation workflow  
-3. **[`data_dictionary.md`](data_dictionary.md)** - detailed definitions of all dataset columns and validation flags  
-4. **[`kpi_definitions.md`](kpi_definitions.md)** - explanation of calculated metrics used in the bi dashboard  
+1. **[`project_overview.md`](project_overview.md)** - introduces project context and objectives   
+2. **[`etl_summary.md`](etl_summary.md)** - explains data transformation and validation workflow  
+3. **[`dashboard_summary.md`](dashboard_summary.md)** – describes dashboard logic, visuals, and interactivity  
+4. **[`data_dictionary.md`](data_dictionary.md)** - provides full column-level reference  
+5. **[`kpi_definitions.md`](kpi_definitions.md)** - lists and defines key performance indicators used throughout the project  
 
 this order reflects the logical data lifecycle:  
 📥 data → ⚙️ transformation → ✅ validation → 📊 visualization  
@@ -29,9 +32,9 @@ this order reflects the logical data lifecycle:
 ## related folders
 | folder | description |
 |---------|--------------|
-| [`/etl`](../etl) | full power query etl pipeline and transformation functions |
-| [`/validation`](../validation) | validation logic, rules, and summary outputs |
-| [`/bi`](../bi) | looker studio dashboard configuration |
+| [`/etl`](../etl) | power query etl pipeline and function documentation |
+| [`/validation`](../validation) | validation logic, rule tables, and data quality framework |
+| [`/bi`](../bi) | looker studio dashboard structure, assets, and supporting documentation |
 | [`/data`](../data) | sample input and output datasets |
 
 📅 *last updated: october 2025*  
