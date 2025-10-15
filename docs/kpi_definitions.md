@@ -1,62 +1,60 @@
 # kpi definitions
+this document consolidates all kpi and metric definitions used across the *fitness analytics etl + bi* project.  
+it includes both **etl-level (power query)** calculations and **bi-level (looker studio)** aggregations.  
+the goal is to ensure transparency, reproducibility, and consistency between data transformation and reporting layers.
 
-> **purpose:** this document defines all key performance indicators (kpis) used across the fitness analytics etl pipeline and looker studio dashboard  
-> each kpi includes its calculation logic, business meaning, and technical source
+## power query kpis
+these metrics are calculated during the etl phase (see: [`/etl/queries/fitness_data_final.pq`](../etl/queries/fitness_data_final.pq))  
+they serve as base inputs for dashboard-level visualizations.
 
-## workout & performance kpis
-| **kpi name** | **formula** | **description** | **business purpose** | **source** |
-|---------------|-------------|-----------------|----------------------|-------------|
-| **average workout duration** | avg(workout_duration_min) | mean workout time in minutes per session | measures training consistency and workload trends | looker studio |
-| **longest workout duration** | max(workout_duration_min) | longest individual workout in the selected date range | identifies peak performance sessions | looker studio |
-| **top performing workout** | max(calories_burned) | finds the most energy-intensive activity | highlights the most effective workout types | looker studio |
-| **calories per minute** | calories_burned / workout_duration_min | average calories burned per minute of workout | measures efficiency of energy expenditure per training | power query |
-| **average calories burned** | avg(calories_burned) | mean calories burned per workout | evaluates workout intensity over time | looker studio |
-| **workout intensity** | if([average_hr] >= 140 then "high" else if [average_hr] >= 110 then "medium" else "low") | categorizes intensity based on average heart rate | enables grouping of workouts by effort level | power query |
-| **workout consistency (%)** | 100 * count_distinct(if(length(trim(workout_type)) > 0, date, null)) / count_distinct(date) | percentage of days with a recorded workout | indicates adherence to fitness plan | looker studio |
+| metric | definition | purpose |
+|---------|-------------|----------|
+| `calories_per_minute` | `calories_burned / workout_duration_min` | measures workout efficiency |
+| `steps_goal_pct` | `(steps / 10000) * 100` | % of daily step goal achieved |
+| `steps_goal_achieved_flag` | `TRUE` if `steps_goal_pct >= 100`, else `FALSE` | goal achievement indicator |
+| `sleep_duration_group` | `"Short(<6h)"`, `"Optimal(6–8h)"`, `"Long(>8h)"` | classifies sleep duration |
+| `average_hr_imputed_flag` | `TRUE` if `average_hr` replaced by median_hr | data completeness check |
+| `workout_intensity` | `"High"` if `average_hr ≥ 140`, `"Medium"` if `≥110`, else `"Low"` | workout load category |
+| `sleep_previous_night` | `sleep_hours` from previous date | used for correlation analysis |
+| `data_validation_flag` | `"Valid"`, `"Check"`, `"Invalid"`, `"NoData"` | result of validation layer |
+| `data_completeness` | `"Complete"` or `"Incomplete"` | overall record completeness flag |
 
-## heart rate kpis
-| **kpi name** | **formula** | **description** | **business purpose** | **source** |
-|---------------|-------------|-----------------|----------------------|-------------|
-| **average heart rate (hr)** | avg(average_hr) | mean average hr across workouts | tracks cardiovascular workload and adaptation | looker studio |
-| **max heart rate (hr)** | max(max_hr) | peak hr achieved during training | indicates maximum exertion level reached | looker studio |
-| **resting heart rate** | avg(resting_hr) | mean resting hr per period | monitors long-term recovery and overall fitness | looker studio |
-| **average_hr_imputed** | boolean flag: true if value imputed using median_hr | identifies hr values filled during etl | ensures data transparency in hr-based metrics | power query |
-| **heart rate zones duration** | sum(workout_duration_min) by workout_intensity | total training time per hr intensity zone | evaluates workload distribution across effort levels | looker studio |
+## looker studio kpis
+these metrics are calculated dynamically in the dashboard layer  
+(see: [`/bi/looker-studio/calculated_fields.md`](../bi/looker-studio/calculated_fields.md)).
 
-## sleep kpis
-| **kpi name** | **formula** | **description** | **business purpose** | **source** |
-|---------------|-------------|-----------------|----------------------|-------------|
-| **average sleep hours** | avg(sleep_hours) | mean number of hours slept per night | evaluates recovery quality | looker studio |
-| **average previous night sleep** | avg(sleep_previous_night) | average sleep duration the night before each workout | correlates sleep with next-day performance | excel → looker studio |
-| **sleep duration** | if(sleep_hours < 6, "short(<6h)") else if(sleep_hours <= 8, "optimal(6-8h)") else "long(>8h)" | categorizes sleep duration for distribution analysis | enables pattern comparison across sleep quality groups | power query |
-| **sleep optimal (%)** | count(case when sleep_duration = "optimal" then 1 end) / count(case when sleep_duration is not null then 1 end) * 100 | percentage of nights with optimal sleep duration (6–8h) | measures adherence to recovery standards | looker studio |
+| kpi name | formula / definition | page | description |
+|-----------|----------------------|--------|--------------|
+| **total workouts** | `COUNT(workout_type)` (filtered by Complete data) | performance panel | total number of recorded workouts |
+| **workout consistency (%)** | `100 * COUNT_DISTINCT(IF(LENGTH(TRIM(workout_type)) > 0, date)) / COUNT_DISTINCT(date)` | performance panel | % of active days containing workouts |
+| **most active day** | `MAX(active_minutes)` grouped by day of week | performance panel | weekday with highest activity level |
+| **average sleep hours** | `AVG(sleep_hours)` | performance panel | mean sleep duration over selected period |
+| **average daily steps** | `AVG(steps)` | performance panel | average step count per day |
+| **record burn (kcal)** | `MAX(calories_burned)` | workout analytics | highest calorie burn in a single session |
+| **average session length (min)** | `AVG(workout_duration_min)` | workout analytics | average workout time per session |
+| **average calories per minute** | `AVG(calories_per_minute)` | workout analytics | average efficiency rate |
+| **average resting hr** | `AVG(resting_hr)` | health & recovery | baseline heart rate level |
+| **sleep quality (%)** | `% of "Optimal(6–8h)" days` | health & recovery | sleep consistency measure |
+| **move quality (%)** | `AVG(steps_goal_pct)` | health & recovery | average goal achievement across period |
 
-## activity kpis
-| **kpi name** | **formula** | **description** | **business purpose** | **source** |
-|---------------|-------------|-----------------|----------------------|-------------|
-| **average daily steps** | avg(steps) | mean daily step count | evaluates overall physical activity level | looker studio |
-| **steps goal (%)** | (steps / 10000) * 100 | % progress toward 10k step goal | measures adherence to daily movement target | power query |
-| **steps goal reached** | if steps_goal_pct >= 100 then true else false | flag for reaching daily step goal | identifies active vs inactive days | power query |
-| **active minutes** | avg(active_minutes) | mean active minutes per day | monitors daily mobility engagement | looker studio |
+## data validation kpis
+these indicators summarize dataset integrity and quality  
+(see: [`/validation/queries/validation_summary.pq`](../validation/queries/validation_summary.pq)).
 
-## recovery & correlation kpis
-| **kpi name** | **formula** | **description** | **business purpose** | **source** |
-|---------------|-------------|-----------------|----------------------|-------------|
-| **recovery category** | case when workout_type is null and (sleep_duration = "optimal(6-8h)" or sleep_duration = "long(>8h)") then "rest" when (workout_intensity = "low" and sleep_duration = "optimal(6-8h)") then "recovery" when workout_intensity in ("high", "medium") then "workout" else "rest" end | classifies each day as workout, recovery, or rest | enables visualization of training balance (gantt-style chart) | power query |
-| **sleep–performance correlation** | scatter: x = avg(sleep_previous_night), y = avg(calories_burned) | shows relation between sleep and next-day performance | reveals how rest impacts energy output | looker studio |
-| **workout–calories relationship** | scatter: x = avg(workout_duration_min), y = avg(calories_burned) | displays dependency between training length and calories | highlights efficiency of different workouts | looker studio |
+| metric | definition | description |
+|---------|-------------|--------------|
+| `has_error` | any rule marked `ERROR` returns `TRUE` | data record contains invalid value |
+| `has_warn` | any rule marked `WARN` returns `TRUE` | data record needs manual review |
+| `data_validation_flag` | classification: `Valid`, `Check`, `Invalid`, `NoData` | overall record status |
+| `data_completeness` | classification: `Complete` or `Incomplete` | high-level data readiness measure |
 
-## derived context fields
-| **kpi / field** | **formula / derivation** | **purpose** |
-|------------------|--------------------------|--------------|
-| day_of_week | date.totext([date], "ddd") | enables weekday trend analysis |
-| day_of_week_number | date.dayofweek([date], day.monday)+1 | provides numeric ordering (1–7) for correct weekday sorting |
-| month_name | date.monthname([date]) | used for monthly aggregation |
-| month_number | date.month([date]) | enables chronological sorting of months |
-| month_start_date | date.startofmonth([date]) | anchors monthly grouping to the first day of the month |
-| quarter | "q" & number.totext(date.quarterofyear([date])) | used for quarterly drill-down |
-| sleep_previous_night |  | enables lag-based correlation analysis |
-| calories_per_minute | calories_burned / workout_duration_min | efficiency metric used in multiple kpis |
+## usage notes
+- all kpis are evaluated after applying the **“Valid Data” filter** in looker studio.  
+- only *complete* records (as per `data_completeness`) are used in aggregations that rely on core metrics.  
+- metric naming conventions differ between layers:  
+  - **etl layer:** `snake_case`  
+  - **bi layer:** `title case` with units (e.g., `Average Resting HR (bpm)`).  
+- consistent validation ensures comparability between time periods and pages.
 
 📅 *last updated: october 2025*  
 👩‍💻 *author: Monika Burnejko*
