@@ -100,8 +100,8 @@ selective **complete data** filter is applied on: *total workouts*, *workout bre
 
 ## notes
 - fields **not** listed here are either raw columns from the etl output or pre-calculated in power query (see: [`/etl/queries/fitness_data_final.pq`](../../etl/queries/fitness_data_final.pq)).  
-- color mappings and thresholds are documented in [`color_system.md`](color_system.md).  
-- tooltip texts are maintained in [`tooltips_catalog.md`](tooltips_catalog.md).  
+- color mappings and thresholds are documented in [`color-system.md`](color-system.md).  
+- tooltip texts are maintained in [`tooltips-catalog.md`](tooltips-catalog.md).  
 
 📅 *last updated: october 2025*  
 👩‍💻 *author: Monika Burnejko*
