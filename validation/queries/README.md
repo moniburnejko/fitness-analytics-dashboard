@@ -10,9 +10,9 @@ each query applies or summarizes validation logic defined in `/validation/functi
 | **validation_summary.pq** | aggregates validation and completeness results, returning total record counts and percentage shares for each category. |
 
 ## related documentation
-- detailed walkthrough: [`validation_walkthrough.md`](../validation_walkthrough.md)  
+- detailed walkthrough: [`validation-walkthrough.md`](../validation-walkthrough.md)  
 - validation function reference: [`/validation/functions`](../functions)  
-- related etl documentation: [`/etl/etl_pipeline.md`](../../etl/etl_pipeline.md) and [`/etl/etl_walkthrough.md`](../../etl/etl_walkthrough.md)
+- related etl documentation: [`/etl/etl-pipeline.md`](../../etl/etl-pipeline.md) and [`/etl/etl-walkthrough.md`](../../etl/etl-walkthrough.md)
 
 ## notes
 - sample input and output files are available in `/data/sample/`.
