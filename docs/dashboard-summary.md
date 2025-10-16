@@ -28,7 +28,7 @@ the dashboard uses this single unified dataset as its source; no blending with e
 | **health & recovery** | gauges, gantt chart, heatmap, scatter chart | explore sleep, recovery quality, and their relation to physical performance |
 
 detailed chart logic and configuration are documented in:  
-[`/bi/looker-studio/report_overview.md`](../bi/looker-studio/report_overview.md)
+[`/bi/looker-studio/report-overview.md`](../bi/looker-studio/report-overview.md)
 
 ## key calculated metrics
 | category | examples | source |
@@ -39,8 +39,8 @@ detailed chart logic and configuration are documented in:
 | **data quality** | `data_validation_flag`, `data_completeness` | power query |
 
 full definitions are listed in:  
-[`/bi/looker-studio/calculated_fields.md`](../bi/looker-studio/calculated_fields.md)  
-and summarized in [`/docs/kpi_definitions.md`](kpi_definitions.md)
+[`/bi/looker-studio/calculated-fields.md`](../bi/looker-studio/calculated-fields.md)  
+and summarized in [`/docs/kpi-definitions.md`](kpi-definitions.md)
 
 ## interactivity & usability
 the dashboard supports:
@@ -57,11 +57,11 @@ the dashboard supports:
   - `complete data` (used selectively on key charts)
 
 tooltip details are documented in:  
-[`/bi/looker-studio/tooltips_catalog.md`](../bi/looker-studio/tooltips_catalog.md)
+[`/bi/looker-studio/tooltips-catalog.md`](../bi/looker-studio/tooltips-catalog.md)
 
 ## color system
 the dashboard follows a consistent dark-themed design and uses semantic color mapping defined in:  
-[`/bi/looker-studio/color-system.md`](../bi/looker_studio/color_system.md)
+[`/bi/looker-studio/color-system.md`](../bi/looker-studio/color-system.md)
 
 **main colors**
 - primary blue (`#4CC9F0`) – highlights & charts  
@@ -85,11 +85,11 @@ the dashboard follows a consistent dark-themed design and uses semantic color ma
 ## related documentation
 | file | description |
 |------|--------------|
-| [`etl_summary.md`](etl_summary.md) | overview of the etl and validation workflow |
-| [`validation_walkthrough.md`](../validation/validation_walkthrough.md) | rule logic and validation framework |
-| [`report_overview.md`](../bi/looker-studio/report_overview.md) | detailed chart-by-chart documentation |
-| [`color_system.md`](../bi/looker-studio/color_system.md) | looker studio color mapping system |
-| [`kpi_definitions.md`](kpi_definitions.md) | full kpi catalog across etl and bi |
+| [`etl-summary.md`](etl-summary.md) | overview of the etl and validation workflow |
+| [`validation-walkthrough.md`](../validation/validation-walkthrough.md) | rule logic and validation framework |
+| [`report-overview.md`](../bi/looker-studio/report-overview.md) | detailed chart-by-chart documentation |
+| [`color-system.md`](../bi/looker-studio/color-system.md) | looker studio color mapping system |
+| [`kpi-definitions.md`](kpi-definitions.md) | full kpi catalog across etl and bi |
 
 📅 *last updated: october 2025*  
 👩‍💻 *author: Monika Burnejko*
