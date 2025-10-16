@@ -26,15 +26,15 @@ cross-filtering, optional metrics, and tooltip-driven explanations allow for **m
 | **tool** | looker studio |
 | **visuals** | scorecards, line & bar charts, donut charts, scatter charts, area charts, gauges, heatmaps |
 | **filters** | month, workout type, reset, valid data (report level), complete data (specific) |
-| **theme** | dark mode using semantic color palette defined in [`color_system.md`](color_system.md) |
+| **theme** | dark mode using semantic color palette defined in [`color-system.md`](color-system.md) |
 | **interactivity** | cross-filtering, drill-down, hover metrics, optional metrics, and tooltips |
 | **report pages** | performance panel, workout analytics, health & recovery |
 
 📎 related documentation:  
-- [`color_system.md`](color_system.md) - visual identity and semantic color palette  
-- [`calculated_fields.md`](calculated_fields.md) - field calculations and logic definitions  
-- [`tooltips_catalog.md`](tooltips_catalog.md) - full list of analytical tooltips  
-- [`../../docs/dashboard_summary.md`](../../docs/dashboard_summary.md) - overall bi documentation summary
+- [`color-system.md`](color-system.md) - visual identity and semantic color palette  
+- [`calculated-fields.md`](calculated-fields.md) - field calculations and logic definitions  
+- [`tooltips-catalog.md`](tooltips-catalog.md) - full list of analytical tooltips  
+- [`../../docs/dashboard-summary.md`](../../docs/dashboard-summary.md) - overall bi documentation summary
 
 ## 🚀 performance panel
 the **performance panel** acts as the dashboard’s main landing page, summarizing overall activity, workout frequency, and intensity structure.  
@@ -331,12 +331,12 @@ it answers the question:
 #### 1. related documentation
 | file | description |
 |------|--------------|
-| [`calculated_fields.md`](calculated_fields.md) | contains all custom fields and logic implemented directly in looker studio (e.g., consistency rate, steps goal %, sleep quality %, etc.) |
-| [`tooltips_catalog.md`](tooltips_catalog.md) | catalog of all tooltip texts used across the dashboard, grouped by page and visualization type |
-| [`color_system.md`](color_system.md) | centralized definition of the dashboard color palette (main, semantic, and intensity scales) |
-| [`/docs/dashboard_summary.md`](../../docs/dashboard_summary.md) | overall summary of the bi dashboard structure and analytical purpose |
-| [`/etl/etl_pipeline.md`](../../etl/etl_pipeline.md) | etl architecture overview that produced the analytics-ready dataset |
-| [`/validation/validation_walkthrough.md`](../../validation/validation_walkthrough.md) | detailed logic of data validation applied before visualization |
+| [`calculated-fields.md`](calculated-fields.md) | contains all custom fields and logic implemented directly in looker studio (e.g., consistency rate, steps goal %, sleep quality %, etc.) |
+| [`tooltips-catalog.md`](tooltips-catalog.md) | catalog of all tooltip texts used across the dashboard, grouped by page and visualization type |
+| [`color-system.md`](color-system.md) | centralized definition of the dashboard color palette (main, semantic, and intensity scales) |
+| [`/docs/dashboard-summary.md`](../../docs/dashboard-summary.md) | overall summary of the bi dashboard structure and analytical purpose |
+| [`/etl/etl-pipeline.md`](../../etl/etl-pipeline.md) | etl architecture overview that produced the analytics-ready dataset |
+| [`/validation/validation-walkthrough.md`](../../validation/validation-walkthrough.md) | detailed logic of data validation applied before visualization |
 
 #### 2. data source
 - all visuals use a single validated dataset: `fitness_data_validation.xlsx` 
@@ -353,7 +353,7 @@ it answers the question:
   - **calm violet (#B388EB)** → calm / recovery states  
   - **warm yellow (#F7B801)** → intermediate or extended values  
 - all visual elements follow a consistent color logic across **Performance Panel**, **Workout Analytics**, and **Health & Recovery**  
-- for detailed references, see: [`color_system.md`](color_system.md)
+- for detailed references, see: [`color-system.md`](color-system.md)
 
 #### 4. interactivity & usability
 the dashboard supports multiple interaction modes:  
