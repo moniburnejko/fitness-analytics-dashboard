@@ -13,7 +13,7 @@ sample input:
 
 the etl pipeline standardizes, merges, and enriches these datasets into a unified structure for analysis and dashboard visualization.  
 for a detailed description of each stage, see:  
-➡️ [`etl_walkthrough.md`](etl/etl_walkthrough.md)
+➡️ [`etl-walkthrough.md`](etl/etl-walkthrough.md)
 
 ## etl highlights
 | stage | description | key functions |
@@ -28,7 +28,7 @@ for a detailed description of each stage, see:
 the validation layer ensures logical and numeric consistency before visualization.  
 rules are defined in [`/validation/queries/validation_rules.pq`](validation/queries/validation_rules.pq) and applied automatically through reusable validation functions.  
 for a complete explanation of validation logic and flow, see:  
-➡️ [`validation_walkthrough.md`](validation/validation_walkthrough.md)
+➡️ [`validation-walkthrough.md`](validation/validation-walkthrough.md)
 
 **core outputs:**
 - `fitness_data_validation` – contains **all columns from `fitness_data_final`** plus validation-specific fields (`rule_*`, `has_error`, `has_warn`, `data_validation_flag`, etc.)  
@@ -56,9 +56,9 @@ sample output:
 - all power query `.pq` scripts include descriptive headers for traceability.  
 - functions are modular and reusable across both etl and validation workflows.  
 - complete documentation available in:  
-  - [`etl_pipeline.md`](etl/etl_pipeline.md)  
-  - [`etl_walkthrough.md`](etl/etl_walkthrough.md)  
-  - [`validation_walkthrough.md`](validation/validation_walkthrough.md)
+  - [`etl-pipeline.md`](etl/etl-pipeline.md)  
+  - [`etl-walkthrough.md`](etl/etl-walkthrough.md)  
+  - [`validation-walkthrough.md`](validation/validation-walkthrough.md)
 
 📅 *last updated: october 2025*  
 👩‍💻 *author: Monika Burnejko*
