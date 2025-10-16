@@ -7,8 +7,8 @@ the etl process standardizes, cleans, merges, and enriches four fitness tracking
 ## folder structure
 | path | description |
 |------|--------------|
-| [`etl_pipeline.md`](etl_pipeline.md) | high-level overview of the etl architecture, data flow, and dependencies |
-| [`etl_walkthrough.md`](etl_walkthrough.md) | detailed step-by-step guide describing each transformation stage |
+| [`etl-pipeline.md`](etl-pipeline.md) | high-level overview of the etl architecture, data flow, and dependencies |
+| [`etl-walkthrough.md`](etl-walkthrough.md) | detailed step-by-step guide describing each transformation stage |
 | [`/functions`](functions) | reusable m-language transformation functions used across queries |
 | [`/queries`](queries) | main power query scripts (.pq) that implement the etl pipeline |
 
