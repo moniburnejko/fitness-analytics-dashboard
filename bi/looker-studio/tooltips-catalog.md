@@ -77,8 +77,8 @@ Each bubble represents the monthly average relationship between sleep duration (
 ## notes
 - all hover tooltips automatically display metric values (e.g., totals, averages, min/max).  
 - custom tooltips were manually designed in looker studio to improve interpretability and storytelling.  
-- consistent color mapping is applied across all charts (see [`color_system.md`](color_system.md))  
-- for calculated field formulas, refer to [`calculated_fields.md`](calculated_fields.md)
+- consistent color mapping is applied across all charts (see [`color-system.md`](color-system.md))  
+- for calculated field formulas, refer to [`calculated-fields.md`](calculated-fields.md)
 
 📅 *last updated: october 2025*  
 👩‍💻 *author: Monika Burnejko*
