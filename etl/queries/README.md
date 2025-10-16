@@ -14,9 +14,9 @@ each file represents a transformation stage within the data flow - from raw inpu
 | `fitness_data_final.pq` | builds the final dataset with hr imputation, derived metrics, and temporal grouping |
 
 ## documentation links
-- **etl pipeline overview:** [`/etl_pipeline.md`](../../etl_pipeline.md)  
+- **etl pipeline overview:** [`/etl-pipeline.md`](../../etl-pipeline.md)  
   → high-level architecture, data flow diagram, and transformation dependencies
-- **etl walkthrough:** [`/etl_walkthrough.md`](../../etl_walkthrough.md)  
+- **etl walkthrough:** [`/etl-walkthrough.md`](../../etl-walkthrough.md)  
   → step-by-step transformation logic with explanations for each query
 
 ## notes
