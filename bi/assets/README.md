@@ -17,9 +17,10 @@ screenshots are exported directly from **looker studio** in png format with cons
 | `performance-panel-` | `performance-panel-main.png` | overview and kpi section of the performance page |
 | `workout-analytics-` | `workout-analytics-main.png` | visuals from the workout analytics page |
 | `health-and-recovery-` | `health-and-recovery-main.png` | visuals from the health & recovery page |
+| `*-filters` | `performance-panel-filters.png` | screens using global filters and cross-filtering |
 | `*-tooltips` | `health-and-recovery-tooltips.png` | screens showing tooltip positions or content |
 | `*-optional-metrics` | `workout-analytics-optional-metrics.png` | screens with optional metric views |
-| `*-filters` | `performance-panel-filters.png` | screens using global filters and cross-filtering |
+| `*-drill-down` | `| `*-drill-down` | `health-and-recovery-drill-down.png` | screens showing drill-down function |
 
 all file names use lowercase letters and underscores for consistency with the repository style.
 
