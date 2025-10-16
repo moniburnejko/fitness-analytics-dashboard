@@ -4,9 +4,9 @@ it includes dashboard screenshots, preview images, and supporting graphics for d
 
 ## usage
 assets from this folder are primarily used in:
-- [`/bi/looker_studio/report_overview.md`](../looker_studio/report_overview.md) – dashboard layout and visual walkthrough  
-- [`/bi/looker_studio/color_system.md`](../looker_studio/color_system.md) – color usage examples  
-- [`/docs/dashboard_summary.md`](../../docs/dashboard_summary.md) – visual overview of all pages  
+- [`/bi/looker-studio/report-overview.md`](../looker-studio/report-overview.md) – dashboard layout and visual walkthrough  
+- [`/bi/looker-studio/color-system.md`](../looker-studio/color-system.md) – color usage examples  
+- [`/docs/dashboard-summary.md`](../../docs/dashboard-summary.md) – visual overview of all pages  
 - repository previews and portfolio showcase (e.g., on notion or linkedin)
 
 screenshots are exported directly from **looker studio** in png format with consistent naming and resolution.
@@ -14,18 +14,18 @@ screenshots are exported directly from **looker studio** in png format with cons
 ## naming conventions
 | prefix | example | meaning |
 |---------|----------|----------|
-| `performance_panel_` | `performance_panel_main.png` | overview and kpi section of the performance page |
-| `workout_analytics_` | `workout_analytics_main.png` | visuals from the workout analytics page |
-| `health_and_recovery_` | `health_and_recovery_main.png` | visuals from the health & recovery page |
-| `*_tooltips` | `health_and_recovery_tooltips.png` | screens showing tooltip positions or content |
-| `*_optional_metrics` | `workout_analytics_optional_metrics.png` | screens with optional metric views |
+| `performance-panel-` | `performance-panel-main.png` | overview and kpi section of the performance page |
+| `workout-analytics-` | `workout-analytics-main.png` | visuals from the workout analytics page |
+| `health-and-recovery-` | `health-and-recovery-main.png` | visuals from the health & recovery page |
+| `*-tooltips` | `health-and-recovery-tooltips.png` | screens showing tooltip positions or content |
+| `*-optional-metrics` | `workout-analytics-optional-metrics.png` | screens with optional metric views |
+| `*-filters` | `performance-panel-filters.png` | screens using global filters and cross-filtering |
 
 all file names use lowercase letters and underscores for consistency with the repository style.
 
 ## technical notes
 - preferred format: `.png`  
 - background: dark mode (native to dashboard design)  
-- recommended resolution: **1600–1920px width** for readability in markdown  
 - images are referenced using relative paths (`![](../assets/screenshots/filename.png)`)
 
 📅 *last updated: october 2025*  
