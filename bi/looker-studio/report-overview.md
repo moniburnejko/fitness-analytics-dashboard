@@ -40,10 +40,19 @@ cross-filtering, optional metrics, and tooltip-driven explanations allow for **m
 the **performance panel** acts as the dashboard’s main landing page, summarizing overall activity, workout frequency, and intensity structure.  
 it provides a quick but data-rich snapshot of performance trends and consistency across the analyzed period.
 
+the **performance panel** acts as the dashboard’s main landing page, summarizing overall activity, workout frequency, and intensity structure.  
+it provides a quick but data-rich snapshot of performance trends and consistency across the analyzed period.
+
 the layout is structured into three main areas:
 1. **summary kpi cards** - global indicators of activity and recovery consistency  
 2. **activity & trend section** – monthly activity trend & daily steps vs day of week - visual overview of monthly activity and daily step distribution  
 3. **intensity & workout structure** – workout breakdown by type and intensity - donut charts showing the share of workouts by type and intensity  
+
+<p align="center">
+  <a href="../assets/screenshots/performance-panel-main.png">
+    <img src="../assets/screenshots/performance-panel-main.png" width="700"/>
+  </a>
+</p>
 
 ### 1. summary kpi section
 **visual type:** `scorecards`               
@@ -133,6 +142,12 @@ the layout includes:
 2. **type-based comparisons** – evaluate workout categories and intensity zones  
 3. **efficiency analysis** – heart rate zones & workout duration vs calories burned - explore how workout duration and calories burned interact  
 
+<p align="center">
+  <a href="../assets/screenshots/workout-analytics-main.png">
+    <img src="../assets/screenshots/workout-analytics-main.png" width="700"/>
+  </a>
+</p>
+
 ### 1. summary kpi section
 **visual type:** `scorecards`  
 **filters:** `valid data` (report-level)
@@ -211,6 +226,12 @@ the layout includes:
 1. **recovery guages** – sleep quality and move quality gauges providing an instant summary of recovery balance and goal achievement
 2. **revobery trends section** – resting heart rate over time & recovery timeline - visualizing long-term recovery trends and distribution of workout, recovery, and rest days
 3. **sleep & performance section** – sleep pattern heatmap & sleep-performance correlation - analyzing sleep duration regularity and its impact on next-day workout performance
+
+<p align="center">
+  <a href="../assets/screenshots/health-and-recovery-main.png">
+    <img src="../assets/screenshots/health-and-recovery-main.png" width="700"/>
+  </a>
+</p>
 
 ### 1. recovery gauges  
 #### a: sleep quality (%)  
