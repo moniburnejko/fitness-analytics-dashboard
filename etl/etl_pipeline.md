@@ -85,10 +85,10 @@ sample outputs available in:
 [`/data/sample/fitness_data_validation_sample.xlsx`](../data/sample/fitness_data_validation_sample.xlsx)
 
 ## related documentation
-- [**etl walkthrough**](./etl_walkthrough.md) – detailed step-by-step guide for each transformation stage  
-- [**validation walkthrough**](../validation/validation_walkthrough.md) – post-etl validation process  
-- [**etl functions**](./functions) – reusable helper scripts  
-- [**etl queries**](./queries) – all core transformation scripts  
+- [**etl-walkthrough**](./etl-walkthrough.md) – detailed step-by-step guide for each transformation stage  
+- [**validation-walkthrough**](../validation/validation-walkthrough.md) – post-etl validation process  
+- [**etl-functions**](./functions) – reusable helper scripts  
+- [**etl-queries**](./queries) – all core transformation scripts  
 
 ## notes
 - data buffering (`Table.Buffer`) is used selectively for performance where required.  
