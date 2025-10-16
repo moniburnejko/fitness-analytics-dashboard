@@ -111,9 +111,9 @@ aggregated summary of validation and completeness results:
 - [/validation/functions/](./functions) - reusable helper functions used across all validation queries.
 - [/validation/queries/](./queries) - includes rule definitions (`validation_rules.pq`), record-level validation logic (`fitness_data_validation.pq`),  
   and summary aggregation (`validation_summary.pq`).
-- [/etl/etl_pipeline.md](../etl/etl_pipeline.md) - describes the full data flow from raw files through the power query transformation process.
-- [/etl/etl_walkthrough.md](../etl/etl_walkthrough.md) - detailed step-by-step explanation of each etl query, transformation stage, and resulting tables.
-- [/data/sample/](/data/sample/) - contains reference Excel files such as `fitness_data_raw_sample.xlsx` and `fitness_data_validation_sample.xlsx`, demonstrating input and post-validation results.
+- [/etl/etl-pipeline.md](../etl/etl-pipeline.md) - describes the full data flow from raw files through the power query transformation process.
+- [/etl/etl-walkthrough.md](../etl/etl-walkthrough.md) - detailed step-by-step explanation of each etl query, transformation stage, and resulting tables.
+- [/data/sample/](/data/sample/) - contains reference excel files such as `fitness_data_raw_sample.xlsx` and `fitness_data_validation_sample.xlsx`, demonstrating input and post-validation results.
 
 ## notes
 - rule logic is modular and easily extendable.
