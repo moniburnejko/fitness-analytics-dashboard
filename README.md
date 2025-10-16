@@ -6,15 +6,15 @@ the workflow covers data ingestion, cleaning, transformation, validation, enrich
 
 ## project overview
 **etl + validation summary:**  
-for a complete overview of the data flow and outputs, see ➡️ [etl_summary.md](docs/etl_summary.md)
+for a complete overview of the data flow and outputs, see ➡️ [etl-summary.md](docs/etl-summary.md)
 
 ## repository structure
 ```
 fitness-analytics-etl-bi/
 │  
 ├── 📁 etl/                              
-│   ├── etl_pipeline.md          
-│   ├── etl_walkthrough.md     
+│   ├── etl-pipeline.md          
+│   ├── etl-walkthrough.md     
 │   ├── README.md
 │   ├── 📁 queries/
 │   │   ├── workoutlogs.pq
@@ -36,7 +36,7 @@ fitness-analytics-etl-bi/
 │       └── README.md
 │
 ├── 📁 validation/
-│   ├── validation_walkthrough.md  
+│   ├── validation-walkthrough.md  
 │   ├── README.md
 │   ├── 📁 queries/
 │   │   ├── validation_rules.pq
@@ -59,10 +59,10 @@ fitness-analytics-etl-bi/
 │
 ├── 📁 bi/
 │   ├── 📁 looker-studio/
-│   │   ├── report_overview.md
-│   │   ├── calculated_fields.md
-│   │   ├── color_system.md
-│   │   ├── tooltip_catalog.md
+│   │   ├── report-overview.md
+│   │   ├── calculated-fields.md
+│   │   ├── color-system.md
+│   │   ├── tooltip-catalog.md
 │   │   └── README.md
 │   └── 📁 assets/
 │       ├── 📁 screenshots/
@@ -70,11 +70,11 @@ fitness-analytics-etl-bi/
 │       └── README.md
 │
 ├── 📁 docs/
-│   ├── project_overview.md      
-│   ├── data_dictionary.md       
-│   ├── kpi_definitions.md
-│   ├── etl_summary.md
-│   ├── dashboard_summary.md      
+│   ├── project-overview.md      
+│   ├── data-dictionary.md       
+│   ├── kpi-definitions.md
+│   ├── etl-summary.md
+│   ├── dashboard-summary.md      
 │   └── README.md
 │
 ├── 📁 .github/
@@ -93,18 +93,18 @@ fitness-analytics-etl-bi/
 ## documentation index
 | file | description |
 |------|--------------|
-| [`etl_pipeline.md`](./etl/etl_pipeline.md) | etl architecture overview and power query data flow |
-| [`etl_walkthrough.md`](./etl/etl_walkthrough.md) | step-by-step transformation guide for the etl pipeline |
-| [`validation_walkthrough.md`](./validation/validation_walkthrough.md) | detailed explanation of validation logic, structure, and rule application |
-| [`etl_summary.md`](./docs/etl_summary.md) | high-level overview of the etl and validation workflow |
-| [`dashboard_summary.md`](./docs/dashboard_summary.md) | complete looker studio dashboard breakdown: structure, metrics, and interactions |
-| [`data_dictionary.md`](./docs/data_dictionary.md) | full column-level metadata including validation and quality flags |
-| [`kpi_definitions.md`](./docs/kpi_definitions.md) | complete list of kpis used in power query and looker studio |
-| [`project_overview.md`](./docs/project_overview.md) | detailed description of the project goals, architecture, and workflow |
-| [`report_overview.md`](./bi/looker-studio/report_overview.md) | dashboard structure, interactions, and metrics mapping |
-| [`calculated_fields.md`](./bi/looker-studio/calculated_fields.md) | all calculated metrics used in looker studio |
-| [`tooltips_catalog.md`](./bi/looker-studio/tooltips_catalog.md) | full list of descriptive and hover tooltips with context |
-| [`color_system.md`](./bi/looker-studio/color_system.md) | color palette reference and semantic mapping across visuals |
+| [`etl-pipeline.md`](./etl/etl-pipeline.md) | etl architecture overview and power query data flow |
+| [`etl-walkthrough.md`](./etl/etl-walkthrough.md) | step-by-step transformation guide for the etl pipeline |
+| [`validation-walkthrough.md`](./validation/validation-walkthrough.md) | detailed explanation of validation logic, structure, and rule application |
+| [`etl-summary.md`](./docs/etl-summary.md) | high-level overview of the etl and validation workflow |
+| [`dashboard-summary.md`](./docs/dashboard-summary.md) | complete looker studio dashboard breakdown: structure, metrics, and interactions |
+| [`data-dictionary.md`](./docs/data-dictionary.md) | full column-level metadata including validation and quality flags |
+| [`kpi-definitions.md`](./docs/kpi-definitions.md) | complete list of kpis used in power query and looker studio |
+| [`project-overview.md`](./docs/project-overview.md) | detailed description of the project goals, architecture, and workflow |
+| [`report-overview.md`](./bi/looker-studio/report-overview.md) | dashboard structure, interactions, and metrics mapping |
+| [`calculated-fields.md`](./bi/looker-studio/calculated-fields.md) | all calculated metrics used in looker studio |
+| [`tooltips-catalog.md`](./bi/looker-studio/tooltips-catalog.md) | full list of descriptive and hover tooltips with context |
+| [`color-system.md`](./bi/looker-studio/color-system.md) | color palette reference and semantic mapping across visuals |
 
 ## project goals
 - design a **modular etl pipeline** in power query for fitness tracking data  
@@ -165,7 +165,7 @@ flowchart TD
 - **trends:** calories/min, resting hr, sleep pattern, recovery correlation  
 - **design:** consistent color system + tooltip-based insights  
 
-more info: [`report_overview.md`](./bi/looker_studio/report_overview.md)
+more info: [`report-overview.md`](./bi/looker-studio/report-overview.md)
 
 ## reproduce the project
 ### prerequisites
@@ -182,12 +182,12 @@ before reproducing the project, make sure you have:
 3.	**load functions into power query**
 - from /etl/functions and /validation/functions
 4.	**follow the etl process**
-- see [`etl_walkthrough.md`](./etl/etl_walkthrough.md)
+- see [`etl-walkthrough.md`](./etl/etl-walkthrough.md)
 5.	**run validation**
-- see [`validation_walkthrough.md`](./validation/validation_walkthrough.md)
+- see [`validation-walkthrough.md`](./validation/validation-walkthrough.md)
 6.	**connect to looker studio**
 - use fitness_data_validation.xlsx as your source
-- rebuild visuals based on [`report_overview.md`](./dashboard/report_overview.md)
+- rebuild visuals based on [`report-overview.md`](./dashboard/report-overview.md)
 7.	**report issues or contribute**
    
 ## license
