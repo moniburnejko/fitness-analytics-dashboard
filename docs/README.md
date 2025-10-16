@@ -7,24 +7,24 @@ the `/docs` directory centralizes all descriptive and reference materials used t
 - summarizes the **etl and validation** workflows  
 - defines **data structures and kpi logic**  
 - provides **business and analytical context** for the bi visualization  
-- documents the **dashboard structure, interactions, and metrics** through `dashboard_summary.md`  
+- documents the **dashboard structure, interactions, and metrics** through `dashboard-summary.md`  
 
 ## folder contents
 | file | description |
 |------|--------------|
-| [`etl_summary.md`](etl_summary.md) | summary of the power query etl and validation process |
-| [`dashboard_summary.md`](dashboard_summary.md) | overview of the looker studio dashboard structure, metrics, and interactions |
-| [`data_dictionary.md`](data_dictionary.md) | column-level metadata with descriptions and data types |
-| [`kpi_definitions.md`](kpi_definitions.md) | concise list of all kpis (etl + looker studio) with logic references |
-| [`project_overview.md`](project_overview.md) | full analytical and technical overview of the project scope, goals, and workflow |
+| [`etl-summary.md`](etl-summary.md) | summary of the power query etl and validation process |
+| [`dashboard-summary.md`](dashboard-summary.md) | overview of the looker studio dashboard structure, metrics, and interactions |
+| [`data-dictionary.md`](data-dictionary.md) | column-level metadata with descriptions and data types |
+| [`kpi-definitions.md`](kpi-definitions.md) | concise list of all kpis (etl + looker studio) with logic references |
+| [`project-overview.md`](project-overview.md) | full analytical and technical overview of the project scope, goals, and workflow |
 
 ## recommended reading order
 for the best understanding of the project’s flow, review the documentation in this order:
-1. **[`project_overview.md`](project_overview.md)** - introduces project context and objectives   
-2. **[`etl_summary.md`](etl_summary.md)** - explains data transformation and validation workflow  
-3. **[`dashboard_summary.md`](dashboard_summary.md)** – describes dashboard logic, visuals, and interactivity  
-4. **[`data_dictionary.md`](data_dictionary.md)** - provides full column-level reference  
-5. **[`kpi_definitions.md`](kpi_definitions.md)** - lists and defines key performance indicators used throughout the project  
+1. **[`project-overview.md`](project-overview.md)** - introduces project context and objectives   
+2. **[`etl-summary.md`](etl-summary.md)** - explains data transformation and validation workflow  
+3. **[`dashboard-summary.md`](dashboard-summary.md)** – describes dashboard logic, visuals, and interactivity  
+4. **[`data-dictionary.md`](data-dictionary.md)** - provides full column-level reference  
+5. **[`kpi-definitions.md`](kpi-definitions.md)** - lists and defines key performance indicators used throughout the project  
 
 this order reflects the logical data lifecycle:  
 📥 data → ⚙️ transformation → ✅ validation → 📊 visualization  
