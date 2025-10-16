@@ -5,13 +5,15 @@ developed as the visualization layer of the *fitness analytics etl + bi* project
 it provides technical details on dashboard structure, calculated fields, tooltips, color system,  
 and data integration from the validated power query output (`fitness_data_validation.xlsx`).
 
+
 ## folder structure
 | file | description |
 |------|--------------|
-| [`report_overview.md`](report_overview.md) | detailed description of dashboard pages, layout, charts, and interactions |
-| [`calculated_fields.md`](calculated_fields.md) | list of calculated fields created directly in looker studio (formulas, logic, and purpose) |
-| [`tooltips_catalog.md`](tooltips_catalog.md) | full catalog of all hover and custom tooltips used in the dashboard |
-| [`color_system.md`](color_system.md) | color palette reference defining main, intensity, and semantic colors |
+| [`report-overview.md`](report-overview.md) | detailed description of dashboard pages, layout, charts, and interactions |
+| [`calculated-fields.md`](calculated-fields.md) | list of calculated fields created directly in looker studio (formulas, logic, and purpose) |
+| [`tooltips-catalog.md`](tooltips-catalog.md) | full catalog of all hover and custom tooltips used in the dashboard |
+| [`color-system.md`](color-system.md) | color palette reference defining main, intensity, and semantic colors |
+
 
 ## data integration
 - the dashboard connects to a **single validated dataset**:  
@@ -23,7 +25,7 @@ and data integration from the validated power query output (`fitness_data_valida
   - **validation layer** → [`fitness_data_validation.pq`](../../validation/queries/fitness_data_validation.pq)
 
 ## design & interactivity
-- consistent **dark ui** color scheme (see [`color_system.md`](color_system.md))  
+- consistent **dark ui** color scheme (see [`color-system.md`](color-system.md))  
 - cross-filtering enabled globally: selecting one chart dynamically filters others  
 - global report-level filters: `Month`, `Workout Type`, and `Reset Filter` button  
 - interactive features include:
@@ -40,7 +42,7 @@ and data integration from the validated power query output (`fitness_data_valida
 | **workout analytics** | detailed comparison of workout types, durations, and performance relationships |
 | **health & recovery** | analysis of sleep, recovery, and resting heart rate trends |
 
-see detailed walkthrough: [`report_overview.md`](report_overview.md)
+see detailed walkthrough: [`report-overview.md`](report-overview.md)
 
 ## tooltip coverage summary
 the dashboard includes both **hover tooltips** and **custom analytical tooltips**  
@@ -53,12 +55,12 @@ to enhance interpretability and guide users through insights.
 | **health & recovery** | 2 | 5 | 7 |
 | **total** | **9** | **11** | **20** |
 
-see full tooltip definitions: [`tooltips_catalog.md`](tooltips_catalog.md)
+see full tooltip definitions: [`tooltips-catalog.md`](tooltips-catalog.md)
 
 ## calculated metrics
 - all dashboard metrics are computed dynamically in looker studio  
-- logic is documented in [`calculated_fields.md`](calculated_fields.md)
-- kpis are summarized again in [`/docs/kpi_definitions.md`](../../docs/kpi_definitions.md)
+- logic is documented in [`calculated-fields.md`](calculated-fields.md)
+- kpis are summarized again in [`/docs/kpi-definitions.md`](../../docs/kpi-definitions.md)
 
 📅 *last updated: october 2025*  
 👩‍💻 *author: Monika Burnejko*
