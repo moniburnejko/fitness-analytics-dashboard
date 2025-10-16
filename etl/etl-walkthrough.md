@@ -114,10 +114,10 @@ the final output, `fitness_data_final`, is then passed to the validation stage (
 sample outputs available in [`/data/sample/fitness_data_validation_sample.xlsx`](../data/sample/fitness_data_validation_sample.xlsx).
 
 ## related documentation
-- [**etl pipeline overview**](./etl_pipeline.md)  
-- [**etl queries**](./queries)  
-- [**etl functions**](./functions)  
-- [**validation walkthrough**](../validation/validation_walkthrough.md)
+- [**etl-pipeline**](./etl-pipeline.md)  
+- [**etl-queries**](./queries)  
+- [**etl-functions**](./functions)  
+- [**validation-walkthrough**](../validation/validation-walkthrough.md)
 
 ## notes
 - buffering is applied only when needed for stable joins.  
