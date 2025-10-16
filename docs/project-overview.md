@@ -37,7 +37,7 @@ the process is modular, transparent, and version-controlled.
 
 custom m-functions (e.g., `fx_clean`, `fx_date`, `fx_number`) ensure consistency and error resilience.
 
-📄 detailed process: [`etl_walkthrough.md`](../etl/etl_walkthrough.md)
+📄 detailed process: [`etl-walkthrough.md`](../etl/etl-walkthrough.md)
 
 ## validation framework
 after etl completion, the dataset passes through a rule-based **validation layer** (see [`/validation`](../validation)).  
@@ -52,7 +52,7 @@ this framework ensures both **logical coherence** and **numerical plausibility**
 the result is a fully validated dataset with record-level flags:
 - `has_error`, `has_warn`, `data_validation_flag`, and `data_completeness`.
 
-📄 detailed process: [`validation_walkthrough.md`](../validation/validation_walkthrough.md)
+📄 detailed process: [`validation-walkthrough.md`](../validation/validation-walkthrough.md)
 
 ## visualization layer
 the validated dataset (`fitness_data_validation.xlsx`) serves as the data source for an interactive **looker studio dashboard**  
@@ -72,7 +72,7 @@ features:
 - tooltips and hover-based metric details,  
 - global filters (`Valid Data`, `Month`, `Workout Type`, `Reset`).
 
-📄 dashboard documentation: [`dashboard_summary.md`](./dashboard_summary.md)
+📄 dashboard documentation: [`dashboard-summary.md`](./dashboard-summary.md)
 
 ## analytical insights
 the dashboard answers key performance and wellness questions:
@@ -108,11 +108,11 @@ sample outputs:
 ## related documentation
 | file | description |
 |-------|--------------|
-| [`etl_summary.md`](./etl_summary.md) | combined summary of data flow and validation |
-| [`kpi_definitions.md`](./kpi_definitions.md) | all kpi formulas and logic |
-| [`dashboard_summary.md`](./dashboard_summary.md) | detailed walkthrough of dashboard pages |
-| [`data_dictionary.md`](./data_dictionary.md) | column-level metadata |
-| [`project_overview.md`](./project_overview.md) | this file - full documentation entry point |
+| [`etl-summary.md`](./etl-summary.md) | combined summary of data flow and validation |
+| [`kpi-definitions.md`](./kpi-definitions.md) | all kpi formulas and logic |
+| [`dashboard-summary.md`](./dashboard-summary.md) | detailed walkthrough of dashboard pages |
+| [`data-dictionary.md`](./data-dictionary.md) | column-level metadata |
+| [`project-overview.md`](./project-overview.md) | this file - full documentation entry point |
 
 📅 *last updated: october 2025*  
 👩‍💻 *author: Monika Burnejko*
