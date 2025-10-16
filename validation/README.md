@@ -7,7 +7,7 @@ the validation process ensures completeness, consistency, and logical accuracy a
 ## folder structure
 | path | description |
 |------|--------------|
-| [`validation_walkthrough.md`](validation_walkthrough.md) | detailed explanation of the validation logic, flow, and output structure |
+| [`validation-walkthrough.md`](validation-walkthrough.md) | detailed explanation of the validation logic, flow, and output structure |
 | [`/functions`](functions) | reusable helper functions for rule evaluation and null or range checks |
 | [`/queries`](queries) | main validation queries (.pq): rule definitions, validation engine, and summary aggregation |
 
@@ -33,11 +33,11 @@ the validation process ensures completeness, consistency, and logical accuracy a
 6. **aggregate results** – produces the `validation_summary` table with record counts and percentages
 
 ## related documentation
-- [**etl pipeline overview**](../etl/etl_pipeline.md)  
-- [**etl walkthrough**](../etl/etl_walkthrough.md)  
-- [**validation walkthrough**](./validation_walkthrough.md)  
-- [**validation functions**](./functions)  
-- [**validation queries**](./queries)
+- [**etl-pipeline**](../etl/etl-pipeline.md)  
+- [**etl-walkthrough**](../etl/etl-walkthrough.md)  
+- [**validation-walkthrough**](./validation-walkthrough.md)  
+- [**validation-functions**](./functions)  
+- [**validation-queries**](./queries)
 
 ## notes
 - validation logic is modular and easily extendable through new rules in `validation_rules.pq`.  
