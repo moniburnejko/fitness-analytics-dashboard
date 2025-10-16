@@ -21,7 +21,7 @@ they serve as base inputs for dashboard-level visualizations.
 
 ## looker studio kpis
 these metrics are calculated dynamically in the dashboard layer  
-(see: [`/bi/looker-studio/calculated_fields.md`](../bi/looker-studio/calculated_fields.md)).
+(see: [`/bi/looker-studio/calculated-fields.md`](../bi/looker-studio/calculated-fields.md)).
 
 | kpi name | formula / definition | page | description |
 |-----------|----------------------|--------|--------------|
