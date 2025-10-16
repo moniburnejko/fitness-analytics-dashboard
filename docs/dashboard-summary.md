@@ -30,6 +30,21 @@ the dashboard uses this single unified dataset as its source; no blending with e
 detailed chart logic and configuration are documented in:  
 [`/bi/looker-studio/report-overview.md`](../bi/looker-studio/report-overview.md)
 
+## dashboard preview
+<p align="center">
+  <a href="../bi/assets/screenshots/performance-panel-main.png">
+    <img src="../bi/assets/screenshots/performance-panel-main.png" width="320"/>
+  </a>
+  &nbsp;&nbsp;
+  <a href="../bi/assets/screenshots/workout-analytics-main.png">
+    <img src="../bi/assets/screenshots/workout-analytics-main.png" width="320"/>
+  </a>
+  &nbsp;&nbsp;
+  <a href="../bi/assets/screenshots/health-and-recovery-main.png">
+    <img src="../bi/assets/screenshots/health-and-recovery-main.png" width="320"/>
+  </a>
+</p>
+
 ## key calculated metrics
 | category | examples | source |
 |-----------|-----------|---------|
