@@ -72,7 +72,7 @@ flowchart TD
    - validation rules and functions are defined in [`/validation`](../validation)  
    - output from validation includes:  
      - `fitness_data_validation` – full dataset with applied rules  
-     - `validation_summary` – aggregated error and completeness overview  
+     - `validation_summary` - aggregated error and completeness overview  
 
 ## output datasets
 | dataset | description |
@@ -91,7 +91,7 @@ sample outputs available in:
 - [**etl-queries**](./queries) – all core transformation scripts  
 
 ## notes
-- data buffering (`Table.Buffer`) is used selectively for performance where required.  
+- data buffering is used selectively for performance where required.  
 - etl logic is modular and can be easily extended to additional data sources or metrics.  
 
 📅 *last updated: october 2025*  
