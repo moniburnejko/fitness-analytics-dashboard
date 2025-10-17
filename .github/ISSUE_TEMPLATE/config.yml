@@ -5,4 +5,4 @@ contact_links:
     about: use discussions for general questions, ideas, or feedback
   - name: 📚 documentation
     url: https://github.com/monikaburnejko/fitness-analytics-etl-bi/tree/main/docs
-    about: refer to documentation for etl and validation walkthroughs description: link to relevant markdown, queries, or screenshots (optional)
+    about: refer to documentation for etl and validation walkthroughs
