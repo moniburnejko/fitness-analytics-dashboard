@@ -3,7 +3,7 @@ this document provides a high-level overview of the power query etl (extract-tra
 it describes the architecture, logical flow, and key components used to transform fragmented fitness tracking data into a clean, analytics-ready dataset.
 
 ## overview
-the etl pipeline integrates four raw data sources — workouts, activity, sleep, and heart rate — from a single excel file:  
+the etl pipeline integrates four raw data sources - workouts, activity, sleep, and heart rate - from a single excel file:  
 [`/data/sample/fitness_data_raw_sample.xlsx`](../data/sample/fitness_data_raw_sample.xlsx).  
 
 through a series of standardized transformations, these sources are cleaned, normalized, merged, and enriched into one unified dataset:  
