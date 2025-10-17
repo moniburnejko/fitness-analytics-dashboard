@@ -22,7 +22,7 @@
 *.pqdata
 *.pqoutput
 
-# Data sources (keep only clean samples)
+# Data sources 
 data/raw/
 data/private/
 data/intermediate/
@@ -69,12 +69,3 @@ $RECYCLE.BIN/
 # Personal notes
 notes.txt
 todo.txt
-
-# ==============================
-# Keep only the essentials:
-#   • Clean Excel workbooks (.xlsx)
-#   • Power Query functions (.pq)
-#   • CSV samples (data_sample.csv)
-#   • README.md, project notes
-#   • Images/screenshots for portfolio
-# ==============================
