@@ -82,8 +82,8 @@ fitness-analytics-etl-bi/
 │   │   ├── bug_report.md
 │   │   ├── feature_request.md
 │   │   └── config.yml
-│   ├── PULL_REQUEST_TEMPLATE.md
-│   └── CONTRIBUTING.md
+│   ├── pull_request_template.md
+│   └── contributing.md
 │
 ├── LICENSE
 ├── .gitignore
