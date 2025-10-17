@@ -6,30 +6,17 @@ labels: ["enhancement"]
 ---
 
 ## summary
-describe the feature or improvement you’d like to propose.  
-<br>**example:**  
-- add fx_to_steps_km conversion to standardize pedometer inputs 
-- include data quality score in validation_summary
+briefly describe the new feature or improvement you'd like to see.
 
 ## motivation
-why is this feature important or useful?  
-<br>**example:**  
-- helps detect low-activity days automatically in the validation layer
+why is this feature important? how would it help analysts or improve performance?
 
-## possible implementation
-how could this feature be added or built?  
-*(optional - rough ideas are fine)*  
-<br>**example:**  
-- create a new column `activity_score` using weighted metrics  
-- integrate fx_is_between thresholds to define score tiers
+## proposed solution
+describe how this feature could be implemented or integrated  
+(e.g. new function, query optimization, data model adjustment, etc.)
 
-## related files or queries
-list affected modules or files (if known):
-- `/etl/functions/fx_to_km.pq`
-- `/validation/queries/validation_summary.pq`
+## alternatives considered
+have you thought about other ways to achieve the same goal?
 
 ## additional context
-add references, screenshots, or examples (optional)
-
-📅 *last updated: october 2025*  
-👩‍💻 *author: Monika Burnejko*
+add links, screenshots, or references if available.
