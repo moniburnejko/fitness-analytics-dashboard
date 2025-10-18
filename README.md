@@ -191,8 +191,7 @@ before reproducing the project, make sure you have:
 7.	**report issues or contribute**
    
 ## license
-this project is released under the **mit license**.
-feel free to reuse or adapt parts of this repository for educational and analytical purposes
+this project is released under the **mit license**.  
 
 ## connect
 👩‍💻 **Monika Burnejko**
@@ -203,5 +202,5 @@ feel free to reuse or adapt parts of this repository for educational and analyti
 
 ---
 <p align="center">
-⭐ if you found this project helpful, please consider giving it a star!
-</p>`
+🌟 if you found this project helpful, please consider giving it a star! 🌟
+</p>
